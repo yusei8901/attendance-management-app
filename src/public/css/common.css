@@ -1,1 +1,62 @@
-/*# sourceMappingURL=common.css.map */
+/* 共通設定 */
+body {
+    margin: 0px;
+}
+h1 {
+    margin: 0px;
+}
+a {
+    text-decoration: none;
+}
+.background-gray {
+    width: 100vw;
+    background-color: #f0eff2;
+}
+
+/* ヘッダー設定 */
+.header {
+    width: 100vw;
+    background-color: #000;
+    color: #fff;
+}
+.header-inner {
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header-logo__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header-right {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.header-link {
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0px 15px;
+}
+.header-link:hover {
+    color: aquamarine;
+}
+.header-logout {
+    color: #fff;
+    background-color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+}
+.header-logout:hover {
+    cursor: pointer;
+    color: aquamarine;
+}

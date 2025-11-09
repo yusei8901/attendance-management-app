@@ -1,0 +1,55 @@
+.form {
+    width: 680px;
+    margin: 80px auto 0px;
+}
+.title {
+    font-size: 36px;
+    text-align: center;
+    margin: 0 0 70px 0;
+}
+.input-box {
+    margin-bottom: 50px;
+}
+.input-box:nth-of-type(2) {
+    margin-bottom: 80px;
+}
+label {
+    font-weight: bold;
+    font-size: 24px;
+}
+input {
+    width: 100%;
+    line-height: 2;
+    font-size: 24px;
+}
+/* 送信ボタン */
+.form-button {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    width: 100%;
+    padding: 10px;
+}
+.form-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+/* エラーメッセージ */
+.error-message {
+    color: #ff0000;
+    height: 20px;
+}
+/* 一般ユーザー用のログイン画面のリンク */
+.link-box {
+    margin: 40px 0px 50px;
+    text-align: center;
+}
+.link {
+    font-size: 20px;
+    color: #0073cc;
+}
+.link:hover {
+    opacity: 0.8;
+}
