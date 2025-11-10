@@ -14,7 +14,7 @@
         $hideSection = true;
     @endphp
     <main>
-        <form class="form" action="/login" method="POST">
+        <form class="form" action="/admin/login" method="POST">
             @csrf
             <h2 class="title">管理者ログイン</h2>
             <div class="input-box">

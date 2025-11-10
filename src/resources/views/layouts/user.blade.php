@@ -25,7 +25,7 @@
                 <a class="header-link" href="#">勤怠</a>
                 <a class="header-link" href="#">勤怠一覧</a>
                 <a class="header-link" href="#">申請</a>
-                <form action="/logout">
+                <form action="/logout" method="POST">
                     @csrf
                     <button class="header-logout">ログアウト</button>
                 </form>
