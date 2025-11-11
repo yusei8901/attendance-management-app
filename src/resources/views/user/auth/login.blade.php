@@ -38,7 +38,7 @@
             <button class="form-button" type="submit">ログインする</button>
         </form>
         <div class="link-box">
-            <a class="link" href="">会員登録はこちら</a>
+            <a class="link" href="/register">会員登録はこちら</a>
         </div>
     </main>
 @endsection

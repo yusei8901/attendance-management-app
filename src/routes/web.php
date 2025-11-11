@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +21,13 @@ Route::get('/', function () {
 });
 
 // 一般ユーザー関連
+Route::post('/register', [RegisteredUserController::class, 'store'])->middleware(['guest'])->name('user.register');
 Route::middleware('auth:web')->group(function(){
     // 勤怠登録画面
     Route::get('/attendance', function () {
-        return view('user.attendance.attend');
-    });
+        $user = Auth::user();
+        return view('user.attendance.attend', ['user' => $user]);
+    })->name('user.attendance.attend');
     // 勤怠一覧画面
     Route::get('/attendance/list', function () {
         return view('user.attendance.index');
@@ -46,7 +50,8 @@ Route::prefix('admin')->group(function() {
 Route::middleware('auth:admin')->group(function(){
     // 勤怠一覧画面
     Route::get('/admin/attendance/list', function () {
-        return view('admin.attendance.index');
+        $admin = Auth::user();
+        return view('admin.attendance.index', ['admin' => $admin]);
     });
     // 勤怠詳細画面
     Route::get('/admin/attendance/{id}', function () {

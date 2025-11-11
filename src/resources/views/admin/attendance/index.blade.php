@@ -11,6 +11,6 @@
 
 @section('content')
     <main class="background-gray">
-
+        <h2>{{ $admin->name }}がログイン中</h2>
     </main>
 @endsection

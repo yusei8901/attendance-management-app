@@ -15,7 +15,7 @@
         <div class="header-inner">
             <div class="header-left">
                 <h1 class="header-logo">
-                    <a class="header-logo__link" href="/">
+                    <a class="header-logo__link" href="/admin/attendance/list">
                         <img src="{{ asset('img/logo.svg') }}" alt="ロゴ画像">
                     </a>
                 </h1>
