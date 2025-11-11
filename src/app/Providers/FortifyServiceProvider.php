@@ -13,7 +13,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\CustomLoginRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -31,7 +33,6 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::registerView(function () {
             return view('user.auth.register');
@@ -43,5 +44,7 @@ class FortifyServiceProvider extends ServiceProvider
             $email = (string) $request->email;
             return Limit::perMinute(10)->by($email . $request->ip());
         });
+
+        $this->app->singleton(FortifyLoginRequest::class, CustomLoginRequest::class);
     }
 }

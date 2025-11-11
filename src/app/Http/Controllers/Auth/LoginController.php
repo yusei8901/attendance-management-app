@@ -11,7 +11,7 @@ use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
 use App\Http\Responses\AdminLoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Http\Requests\LoginRequest;
-use App\Http\Requests\LoginRequest as OriginalLoginRequest;
+use App\Http\Requests\CustomLoginRequest;
 
 class LoginController extends Controller
 {
@@ -49,7 +49,7 @@ class LoginController extends Controller
      * @param  \Laravel\Fortify\Http\Requests\LoginRequest  $request
      * @return mixed
      */
-    public function store(OriginalLoginRequest $request)
+    public function store(CustomLoginRequest $request)
     {
         return $this->loginPipeline($request)->then(function ($request) {
             return app(AdminLoginResponse::class);
@@ -62,7 +62,7 @@ class LoginController extends Controller
      * @param  \Laravel\Fortify\Http\Requests\LoginRequest  $request
      * @return \Illuminate\Pipeline\Pipeline
      */
-    protected function loginPipeline(OriginalLoginRequest $request)
+    protected function loginPipeline(CustomLoginRequest $request)
     {
         return (new Pipeline(app()))->send($request)->through(array_filter([
             AttemptToAuthenticate::class,

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\EmailVerificationController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,8 +22,16 @@ Route::get('/', function () {
 });
 
 // 一般ユーザー関連
+// 会員登録
 Route::post('/register', [RegisteredUserController::class, 'store'])->middleware(['guest'])->name('user.register');
-Route::middleware('auth:web')->group(function(){
+// メール認証関連
+Route::middleware('auth:web')->group(function() {
+    Route::get('/email/verify', [EmailVerificationController::class, 'notice'])->name('verification.notice');
+    Route::get('/email/verify/confirm', [EmailVerificationController::class, 'confirm'])->name('verification.confirm');
+    Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->middleware('signed')->name('verification.verify');
+    Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])->middleware('throttle:6,1')->name('verification.resend');
+});
+Route::middleware(['auth:web', 'verified'])->group(function(){
     // 勤怠登録画面
     Route::get('/attendance', function () {
         $user = Auth::user();

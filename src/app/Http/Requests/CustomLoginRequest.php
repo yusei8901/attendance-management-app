@@ -5,8 +5,9 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\EmailFormatRule;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
 
-class LoginRequest extends FormRequest
+class CustomLoginRequest extends FortifyLoginRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -47,7 +48,7 @@ class LoginRequest extends FormRequest
                 $credentials = $this->only('email', 'password');
                 if ($this->is('admin/*')) {
                     if (! Auth::guard('admin')->validate($credentials)) {
-                        $validator->errors()->add('email', '管理者アカウントが登録されていません。');
+                        $validator->errors()->add('email', 'ログイン情報が登録されていません。');
                     }
                 } else {
                     if (! Auth::guard('web')->validate($credentials)) {

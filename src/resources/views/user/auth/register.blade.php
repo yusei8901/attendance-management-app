@@ -2,7 +2,7 @@
 @extends('layouts.user')
 
 @section('title')
-ログイン
+会員登録
 @endsection
 
 @section('css')

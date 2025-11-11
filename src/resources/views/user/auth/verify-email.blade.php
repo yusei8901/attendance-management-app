@@ -6,11 +6,25 @@
 @endsection
 
 @section('css')
-<link href="{{ asset('') }}" rel="stylesheet" />
+<link href="{{ asset('css/verify.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
     <main>
-
+        @if(session('message'))
+            <div class="alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+        <div class="content-wrapper">
+            <p>登録していただいたメールアドレスに認証メールを送付しました。<br>
+            メール認証を完了してください。
+            </p>
+            <a class="verify-button" href="{{ route('verification.confirm') }}">認証はこちらから</a>
+            <form action="{{ route('verification.resend') }}" method="POST">
+                @csrf
+                <button class="verify-email-again" type="submit">認証メールを再送する</button>
+            </form>
+        </div>
     </main>
 @endsection
