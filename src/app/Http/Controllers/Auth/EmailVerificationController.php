@@ -19,7 +19,7 @@ class EmailVerificationController extends Controller
     public function resend(Request $request)
     {
         $request->user()->sendEmailVerificationNotification();
-        return back()->with('message', '認証メールを再送しました。');
+        return back()->with('resend_message', '認証メールを再送しました。');
     }
 
     public function confirm()
@@ -39,6 +39,6 @@ class EmailVerificationController extends Controller
     public function verify(EmailVerificationRequest $request)
     {
         $request->fulfill(); // 認証完了
-        return redirect('/attendance')->with('success', 'メール認証が完了しました');
+        return redirect('/attendance')->with('verify_success', 'メール認証が完了しました');
     }
 }

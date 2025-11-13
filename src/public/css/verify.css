@@ -40,31 +40,3 @@ p {
     cursor: pointer;
     opacity: 0.8;
 }
-
-.header {
-    position: relative;
-    z-index: 10;
-}
-.alert-success {
-    width: 100%;
-    padding: 10px 15px;
-    background-color: rgb(8, 122, 8);
-    color: white;
-    position: absolute;
-    top: 38px;
-    z-index: 5;
-    animation: alert-animation 3s ease;
-}
-@keyframes alert-animation {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(44px);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(0px);
-        opacity: 0;
-    }
-}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserAttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\EmailVerificationController;
@@ -26,17 +27,24 @@ Route::get('/', function () {
 Route::post('/register', [RegisteredUserController::class, 'store'])->middleware(['guest'])->name('user.register');
 // メール認証関連
 Route::middleware('auth:web')->group(function() {
-    Route::get('/email/verify', [EmailVerificationController::class, 'notice'])->name('verification.notice');
-    Route::get('/email/verify/confirm', [EmailVerificationController::class, 'confirm'])->name('verification.confirm');
-    Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->middleware('signed')->name('verification.verify');
-    Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])->middleware('throttle:6,1')->name('verification.resend');
+    Route::get('/email/verify', [EmailVerificationController::class, 'notice'])
+        ->name('verification.notice');
+    Route::get('/email/verify/confirm', [EmailVerificationController::class, 'confirm'])
+        ->name('verification.confirm');
+    Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
+        ->middleware('signed')->name('verification.verify');
+    Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])
+        ->middleware('throttle:6,1')->name('verification.resend');
 });
 Route::middleware(['auth:web', 'verified'])->group(function(){
     // 勤怠登録画面
-    Route::get('/attendance', function () {
-        $user = Auth::user();
-        return view('user.attendance.attend', ['user' => $user]);
-    })->name('user.attendance.attend');
+    Route::get('/attendance', [UserAttendanceController::class, 'attend'])->name('user.attendance.attend');
+    Route::post('/attendance/start', [UserAttendanceController::class, 'workStart'])->name('user.attendance.start');
+    Route::post('/attendance/end', [UserAttendanceController::class, 'workEnd'])->name('user.attendance.end');
+    Route::post('/attendance/break/start', [UserAttendanceController::class, 'breakStart'])->name('user.break.start');
+    Route::post('/attendance/break/end', [UserAttendanceController::class, 'breakEnd'])->name('user.break.end');
+
+
     // 勤怠一覧画面
     Route::get('/attendance/list', function () {
         return view('user.attendance.index');

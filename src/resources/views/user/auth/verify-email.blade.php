@@ -11,9 +11,9 @@
 
 @section('content')
     <main>
-        @if(session('message'))
+        @if(session('resend_message'))
             <div class="alert-success">
-                {{ session('message') }}
+                {{ session('resend_message') }}
             </div>
         @endif
         <div class="content-wrapper">

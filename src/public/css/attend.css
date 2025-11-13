@@ -1,0 +1,73 @@
+.background-gray {
+    height: calc(100vh - 82px);
+}
+.attendance-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+.status-label {
+    display: inline-block;
+    font-size: 18px;
+    color: #696969;
+    background-color: #c8c8c8;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+.date {
+    font-size: 40px;
+    margin-bottom:10px;
+}
+.time {
+    font-size: 80px;
+    font-weight: bold;
+    margin-bottom: 80px;
+}
+.colon {
+    animation: blink 2s step-end infinite;
+}
+@keyframes blink {
+    50% { opacity: 0; }
+}
+.finished-text {
+    font-size: 26px;
+    font-weight: bold;
+}
+/* ボタン設定 */
+.two-btn {
+    width: 530px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+.btn {
+    letter-spacing: 9px;
+    text-indent: 9px;
+    width: 230px;
+    font-size: 32px;
+    font-weight: bold;
+    border: none;
+    padding: 15px 0px;
+    border-radius: 15px;
+}
+.attend {
+    background-color: #000;
+    color: #fff;
+}
+.attend:hover {
+    cursor: pointer;
+    background-color: aquamarine;
+    color: #000;
+}
+.break {
+    background-color: #fff;
+    color: #000;
+}
+.break:hover {
+    cursor: pointer;
+    background-color: aquamarine;
+    color: #000;
+}

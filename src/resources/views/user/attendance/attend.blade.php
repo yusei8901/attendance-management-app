@@ -2,15 +2,90 @@
 @extends('layouts.user')
 
 @section('title')
-勤怠登録
+    勤怠登録
 @endsection
 
 @section('css')
-<link href="{{ asset('') }}" rel="stylesheet" />
+    <link href="{{ asset('css/attend.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
+    @if (session('verify_success'))
+        <div class="alert-success">
+            {{ session('verify_success') }}
+        </div>
+    @endif
     <main class="background-gray">
-        <h2>{{ $user->name }}がログイン中</h2>
+        <div class="attendance-container">
+            {{-- 勤務状態ラベル --}}
+            <div class="status-label">
+                @if (!$attendance)
+                    勤務外
+                @elseif ($attendance->end_time)
+                    退勤済
+                @elseif ($latestBreak && $latestBreak->break_end === null)
+                    休憩中
+                @else
+                    出勤中
+                @endif
+            </div>
+            {{-- 日付・曜日 --}}
+            <div id="current-date" class="date">読み込み中...</div>
+            {{-- 時刻 --}}
+            <div id="time" class="time">
+                <span id="hh"></span><span class="colon">:</span><span id="mm"></span>
+            </div>
+            {{-- 出勤ボタン --}}
+            <div class="attendance-buttons">
+                @if (!$attendance)
+                    <form method="POST" action="{{ route('user.attendance.start') }}">
+                        @csrf
+                        <button type="submit" class="btn attend">出勤</button>
+                    </form>
+                @elseif ($attendance->end_time)
+                    <p class="finished-text">お疲れさまでした。</p>
+                @elseif ($latestBreak && $latestBreak->break_end === null)
+                    <form method="POST" action="{{ route('user.break.end') }}">
+                        @csrf
+                        <button type="submit" class="btn break">休憩戻</button>
+                    </form>
+                @else
+                    <div class="two-btn">
+                        <form method="POST" action="{{ route('user.break.start') }}">
+                            @csrf
+                            <button type="submit" class="btn break">休憩入</button>
+                        </form>
+                        <form method="POST" action="{{ route('user.attendance.end') }}">
+                            @csrf
+                            <button type="submit" class="btn attend">退勤</button>
+                        </form>
+                    </div>
+                @endif
+
+            </div>
+        </div>
+
+        <script>
+            function updateClock() {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = now.getMonth() + 1;
+                const date = now.getDate();
+                const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+                const day = dayNames[now.getDay()];
+                // 日付
+                document.getElementById('current-date').textContent =
+                    `${year}年${month}月${date}日(${day})`;
+                // 時刻（コロンはCSSで点滅）
+                const hh = String(now.getHours()).padStart(2, '0');
+                const mm = String(now.getMinutes()).padStart(2, '0');
+                document.getElementById('hh').textContent = hh;
+                document.getElementById('mm').textContent = mm;
+            }
+            // 初回実行
+            updateClock();
+            // 毎秒更新
+            setInterval(updateClock, 1000);
+        </script>
     </main>
 @endsection
