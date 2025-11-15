@@ -38,21 +38,22 @@ Route::middleware('auth:web')->group(function() {
 });
 Route::middleware(['auth:web', 'verified'])->group(function(){
     // 勤怠登録画面
-    Route::get('/attendance', [UserAttendanceController::class, 'attend'])->name('user.attendance.attend');
-    Route::post('/attendance/start', [UserAttendanceController::class, 'workStart'])->name('user.attendance.start');
-    Route::post('/attendance/end', [UserAttendanceController::class, 'workEnd'])->name('user.attendance.end');
-    Route::post('/attendance/break/start', [UserAttendanceController::class, 'breakStart'])->name('user.break.start');
-    Route::post('/attendance/break/end', [UserAttendanceController::class, 'breakEnd'])->name('user.break.end');
-
-
+    Route::get('/attendance', [UserAttendanceController::class, 'attend'])
+        ->name('user.attendance.attend');
+    Route::post('/attendance/start', [UserAttendanceController::class, 'workStart'])
+        ->name('user.attendance.start');
+    Route::post('/attendance/end', [UserAttendanceController::class, 'workEnd'])
+        ->name('user.attendance.end');
+    Route::post('/attendance/break/start', [UserAttendanceController::class, 'breakStart'])
+        ->name('user.break.start');
+    Route::post('/attendance/break/end', [UserAttendanceController::class, 'breakEnd'])
+        ->name('user.break.end');
     // 勤怠一覧画面
-    Route::get('/attendance/list', function () {
-        return view('user.attendance.index');
-    });
+    Route::get('/attendance/list/{year?}/{month?}', [UserAttendanceController::class, 'index'])
+        ->name('user.attendance.index');
     // 勤怠詳細画面
-    Route::get('/attendance/detail/{id}', function () {
-        return view('user.attendance.detail');
-    });
+    Route::get('/attendance/detail/{id}', [UserAttendanceController::class, 'detail'])
+        ->name('user.attendance.detail');
     // 申請一覧画面
     Route::get('/stamp_correction_request/list', function () {
         return view('user.attendance.requests');

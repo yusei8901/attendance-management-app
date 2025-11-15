@@ -1,0 +1,164 @@
+a {
+    color: #737373;
+}
+
+.background-gray {
+    min-height: calc(100vh - 82px);
+    padding: 80px 0px;
+}
+.attendance-wrapper {
+    width: 900px;
+    margin: 0 auto;
+}
+.section-title {
+    font-size: 30px;
+    font-weight: bold;
+    border-left: 8px solid #000;
+    box-sizing: border-box;
+    padding-left: 10px;
+    margin: 0px 0px 30px -10px;
+}
+.attendance-month {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+.month-before {
+    margin-left: 25px;
+    position: relative;
+}
+.month-before::before {
+    position: absolute;
+    content: "";
+    background-image: url("../img/arrow_left_icon.svg");
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    left: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.month-next {
+    margin-right: 25px;
+    position: relative;
+}
+.month-next::after {
+    position: absolute;
+    content: "";
+    background-image: url("../img/arrow_right_icon.svg");
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.month-before:hover,
+.month-next:hover,
+.date:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.attendance-list {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.attendance-list table {
+    font-weight: bold;
+    color: #737373;
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
+    border-collapse: collapse;
+    border: none;
+}
+.attendance-list th,
+.attendance-list td {
+    letter-spacing: 3px;
+    text-indent: 3px;
+    border: none;
+    padding: 8px 0px;
+}
+.attendance-list th {
+    border-bottom: #e1e1e1 2px solid;
+}
+.attendance-list td {
+    border-bottom: #e1e1e1 1px solid;
+}
+.attendance-list table th:nth-child(1),
+.attendance-list table td:nth-child(1) {
+    width: 25%;
+}
+.attendance-list table th:nth-child(n+2),
+.attendance-list table td:nth-child(n+2) {
+    width: calc((100% - 25%) / 5);
+}
+.detail-link {
+    color: #000;
+}
+.detail-link:hover {
+    text-decoration: underline;
+    opacity: 0.7;
+}
+
+
+/* 月選択に関して */
+.month-display {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.month-display:hover {
+    opacity: 0.7;
+}
+/* モーダル */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.modal-window {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+.modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.cancel-btn, .submit-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.cancel-btn {
+    background: #ccc;
+}
+.submit-btn {
+    background: #4A8BF5;
+    color: #fff;
+}
