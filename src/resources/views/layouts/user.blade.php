@@ -22,9 +22,14 @@
             </div>
             @if (!isset($hideSection) || !$hideSection)
             <div class="header-right">
+                @if(!$attendance->end_time)
                 <a class="header-link" href="#">勤怠</a>
                 <a class="header-link" href="#">勤怠一覧</a>
                 <a class="header-link" href="#">申請</a>
+                @else
+                <a class="header-link" href="">今月の出勤一覧</a>
+                <a class="header-link" href="">申請一覧</a>
+                @endif
                 <form action="/logout" method="POST">
                     @csrf
                     <button class="header-logout">ログアウト</button>
