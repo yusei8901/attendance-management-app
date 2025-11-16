@@ -11,11 +11,8 @@ function formatTime($minutes)
     if ($minutes === null || $minutes === '' || !is_numeric($minutes)) {
         return '-';
     }
-
     $minutes = intval($minutes); // 数値化
-
     $hours = floor($minutes / 60);
-    $mins = $minutes;
-
+    $mins = $minutes - $hours * 60;
     return $hours . ':' . sprintf('%02d', $mins);
 }

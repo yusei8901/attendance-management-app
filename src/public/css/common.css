@@ -87,3 +87,18 @@ a {
         opacity: 0;
     }
 }
+
+/* 送信ボタン */
+.form-button {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    width: 100%;
+    padding: 10px;
+}
+.form-button:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}

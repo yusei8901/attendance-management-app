@@ -22,7 +22,7 @@
             </div>
             @if (!isset($hideSection) || !$hideSection)
             <div class="header-right">
-                @if(!$attendance->end_time)
+                @if($attendance->end_time === null)
                 <a class="header-link" href="/attendance">勤怠</a>
                 <a class="header-link" href="/attendance/list">勤怠一覧</a>
                 <a class="header-link" href="/attendance/detail/{id}">申請</a>

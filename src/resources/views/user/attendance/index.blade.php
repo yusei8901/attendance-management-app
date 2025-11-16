@@ -13,7 +13,7 @@
 @section('content')
     <main class="background-gray">
         <div class="attendance-wrapper">
-            <h2 class="section-title">勤怠一覧</h2>
+            <h2 class="page-title">勤怠一覧</h2>
             <div class="attendance-month">
                 <a class="month-before"
                     href="{{ route('user.attendance.index', ['year' => $current->copy()->subMonth()->year, 'month' => $current->copy()->subMonth()->month]) }}">
