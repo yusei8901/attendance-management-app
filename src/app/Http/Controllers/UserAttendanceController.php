@@ -12,11 +12,6 @@ class UserAttendanceController extends Controller
     // 勤怠一覧画面表示
     public function index($year = null, $month = null)
     {
-        $user = auth()->user();
-        $today = now()->toDateString();
-        $attendance = Attendance::where('user_id', $user->id)
-            ->where('work_date', $today)
-            ->first();
         $current = Carbon::createFromDate(
             $year ?? Carbon::now()->year,
             $month ?? Carbon::now()->month,
@@ -29,13 +24,13 @@ class UserAttendanceController extends Controller
             ->whereBetween('work_date', [$start, $end])
             ->orderBy('work_date')
             ->get();
-        return view('user.attendance.index', compact('current', 'attends', 'attendance'));
+        return view('user.attendance.index', compact('current', 'attends'));
     }
-
+    // 勤怠詳細画面の表示
     public function detail($id)
     {
-        $attendance = Attendance::findOrFail($id);
-        return view('user.attendance.detail', compact('attendance'));
+        $attend = Attendance::findOrFail($id);
+        return view('user.attendance.detail', compact('attend'));
     }
 
     // 勤怠画面表示
