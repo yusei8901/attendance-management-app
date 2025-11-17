@@ -29,12 +29,49 @@ class UserAttendanceController extends Controller
     // 勤怠詳細画面の表示
     public function detail($id)
     {
+        $user = auth()->user();
         $attend = Attendance::findOrFail($id);
-        return view('user.attendance.detail', compact('attend'));
+        return view('user.attendance.detail', compact('attend', 'user'));
+    }
+    // 勤怠詳細画面の編集処理
+    public function edit(Request $request, $id)
+    {
+        $attend = Attendance::with('breaks')->findOrFail($id);
+        $start = Carbon::parse($request->input('start_time'));
+        $end = Carbon::parse($request->input('end_time'));
+        $workMinutes = $start->diffInMinutes($end);
+        $breakTotal = 0;
+        $requestBreaks = $request->input('breaks', []);
+        foreach ($attend->breaks as $index => $break) {
+            $breakStart = $requestBreaks[$index]['break_start'] ?? null;
+            $breakEnd   = $requestBreaks[$index]['break_end'] ?? null;
+            // break_start または break_end が無ければこの休憩は計算しない
+            if (!$breakStart || !$breakEnd) {
+                continue;
+            }
+            $startTime = Carbon::parse($breakStart);
+            $endTime   = Carbon::parse($breakEnd);
+            $breakMinutes = $startTime->diffInMinutes($endTime);
+            $breakTotal += $breakMinutes;
+            $break->update([
+                'break_start' => $breakStart,
+                'break_end'   => $breakEnd,
+                'break_time'  => $breakMinutes,
+            ]);
+        }
+        $attend->update([
+            'start_time' => $request->input('start_time'),
+            'end_time'   => $request->input('end_time'),
+            'remarks'    => $request->input('remarks'),
+            'work_time'  => max($workMinutes - $breakTotal, 0),
+            'stamp_correction_request' => 'pending',
+        ]);
+        return redirect()->route('user.attendance.detail', ['id' => $attend->id])->with('success_message', '勤怠情報を更新し、申請を送信しました。');
     }
 
     // 勤怠画面表示
-    public function attend() {
+    public function attend()
+    {
         $user = auth()->user();
         $today = now()->toDateString();
         $attendance = Attendance::where('user_id', $user->id)

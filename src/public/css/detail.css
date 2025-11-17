@@ -73,6 +73,8 @@ input {
 
 .detail-form {
     width: 100%;
+}
+.button-wrapper {
     text-align: right;
 }
 .form-button {
@@ -80,4 +82,8 @@ input {
     width: 230px;
     padding: 15px;
     border-radius: 5px;
+}
+
+.remarks {
+    text-align: left;
 }

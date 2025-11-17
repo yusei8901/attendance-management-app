@@ -64,10 +64,42 @@
                         @endphp
                         <tr>
                             <td>{{ $day->format('m/d') }}({{ ['日', '月', '火', '水', '木', '金', '土'][$day->dayOfWeek] }})</td>
-                            <td>{{ $attend ? formatTimeString($attend->start_time) : '-' }}</td>
-                            <td>{{ $attend ? formatTimeString($attend->end_time) : '-' }}</td>
-                            <td>{{ $attend ? formatTime($breakMinutes) : '-' }}</td>
-                            <td>{{ $attend ? formatTime($attend->work_time) : '-' }}</td>
+                            <td>
+                                @if (!$attend)
+                                    -
+                                @elseif($attend->stamp_correction_request === 'pending')
+                                    <span class="info-text">修正申請中</span>
+                                @else
+                                    {{ formatTimeString($attend->start_time) }}
+                                @endif
+                            </td>
+                            <td>
+                                @if (!$attend)
+                                    -
+                                @elseif($attend->stamp_correction_request === 'pending')
+                                    <span class="info-text">修正申請中</span>
+                                @else
+                                    {{ formatTimeString($attend->end_time) }}
+                                @endif
+                            </td>
+                            <td>
+                                @if (!$attend)
+                                    -
+                                @elseif($attend->stamp_correction_request === 'pending')
+                                    <span class="info-text">修正申請中</span>
+                                @else
+                                    {{ formatTime($breakMinutes) }}
+                                @endif
+                            </td>
+                            <td>
+                                @if (!$attend)
+                                    -
+                                @elseif($attend->stamp_correction_request === 'pending')
+                                    <span class="info-text">修正申請中</span>
+                                @else
+                                    {{ formatTime($attend->work_time) }}
+                                @endif
+                            </td>
                             <td>
                                 @if ($attend)
                                     <a class="detail-link" href="{{ route('user.attendance.detail', $attend->id) }}">

@@ -19,7 +19,9 @@ class CreateAttendancesTable extends Migration
             $table->date('work_date');
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
-            $table->integer('work_time')->nullable(); //分単位
+            $table->integer('work_time')->nullable();
+            $table->text('remarks')->nullable();
+            $table->enum('stamp_correction_request', ['before_request', 'pending', 'approved'])->default('before_request');
             $table->timestamps();
         });
     }

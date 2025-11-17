@@ -14,7 +14,9 @@ class Attendance extends Model
         'work_date',
         'start_time',
         'end_time',
-        'work_time'
+        'work_time',
+        'remarks',
+        'stamp_correction_request',
     ];
 
     public function breaks()
