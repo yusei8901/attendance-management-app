@@ -23,11 +23,7 @@ input {
     font-size: 24px;
 }
 
-/* エラーメッセージ */
-.error-message {
-    color: #ff0000;
-    height: 20px;
-}
+
 /* 一般ユーザー用のログイン画面のリンク */
 .link-box {
     margin: 40px 0px 50px;

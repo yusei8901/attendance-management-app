@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Attendance;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CorrectionRequest;
 
 class UserAttendanceController extends Controller
 {
@@ -34,7 +35,7 @@ class UserAttendanceController extends Controller
         return view('user.attendance.detail', compact('attend', 'user'));
     }
     // 勤怠詳細画面の編集処理
-    public function edit(Request $request, $id)
+    public function edit(CorrectionRequest $request, $id)
     {
         $attend = Attendance::with('breaks')->findOrFail($id);
         $start = Carbon::parse($request->input('start_time'));

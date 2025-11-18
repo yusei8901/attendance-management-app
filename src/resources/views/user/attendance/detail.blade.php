@@ -40,28 +40,37 @@
                                 <td>
                                     @if ($attend->stamp_correction_request === 'before_request')
                                         <input type="text" name="start_time"
-                                            value="{{ $attend->start_time ? \Carbon\Carbon::parse($attend->start_time)->format('H:i') : '' }}">
+                                            value="{{ old('start_time', formatTimeNullable($attend->start_time)) }}">
                                     @else
                                         {{ $attend->start_time ? \Carbon\Carbon::parse($attend->start_time)->format('H:i') : '' }}
                                     @endif
+
                                 </td>
                                 <td>～</td>
                                 <td>
                                     @if ($attend->stamp_correction_request === 'before_request')
                                         <input type="text" name="end_time"
-                                            value="{{ $attend->end_time ? \Carbon\Carbon::parse($attend->end_time)->format('H:i') : '' }}">
+                                            value="{{ old('end_time', formatTimeNullable($attend->end_time)) }}">
                                     @else
                                         {{ $attend->end_time ? \Carbon\Carbon::parse($attend->end_time)->format('H:i') : '' }}
                                     @endif
                                 </td>
-                                <td></td>
+                                <td>
+                                    <div class="error-message">
+                                        @if ($errors->has('start_time'))
+                                            {!! $errors->first('start_time') !!}
+                                        @elseif ($errors->has('end_time'))
+                                            {!! $errors->first('end_time') !!}
+                                        @endif
+                                    </div>
+                                </td>
                             </tr>
                             @if ($attend->breaks->isEmpty())
                                 <tr>
                                     <th>休憩</th>
                                     <td>
                                         @if ($attend->stamp_correction_request === 'before_request')
-                                            <input type="text" name="breaks[0][break_start]" value="">
+                                            <input type="text" name="breaks[0][break_start]" value="{{ old('breaks.0.break_start') }}">
                                         @else
                                             --:--
                                         @endif
@@ -69,12 +78,20 @@
                                     <td>～</td>
                                     <td>
                                         @if ($attend->stamp_correction_request === 'before_request')
-                                            <input type="text" name="breaks[0][break_end]" value="">
+                                            <input type="text" name="breaks[0][break_end]" value="{{ old('breaks.0.break_end') }}">
                                         @else
                                             --:--
                                         @endif
                                     </td>
-                                    <td></td>
+                                    <td>
+                                        <div class="error-message">
+                                            @if ($errors->has('breaks.0.break_start'))
+                                                {!! $errors->first('breaks.0.break_start') !!}
+                                            @elseif ($errors->has('breaks.0.break_end'))
+                                                {!! $errors->first('breaks.0.break_end') !!}
+                                            @endif
+                                        </div>
+                                    </td>
                                 </tr>
                             @endif
 
@@ -91,7 +108,7 @@
                                             <input type="hidden" name="breaks[{{ $loop->index }}][id]"
                                                 value="{{ $break->id }}">
                                             <input type="text" name="breaks[{{ $loop->index }}][break_start]"
-                                                value="{{ $break->break_start ? \Carbon\Carbon::parse($break->break_start)->format('H:i') : '' }}">
+                                                value="{{ old("breaks.$loop->index.break_start", formatTimeNullable($break->break_start)) }}">
                                         @else
                                             {{ $break->break_start ? \Carbon\Carbon::parse($break->break_start)->format('H:i') : '' }}
                                         @endif
@@ -100,12 +117,21 @@
                                     <td>
                                         @if ($attend->stamp_correction_request === 'before_request')
                                             <input type="text" name="breaks[{{ $loop->index }}][break_end]"
-                                                value="{{ $break->break_end ? \Carbon\Carbon::parse($break->break_end)->format('H:i') : '' }}">
+                                                value="{{ old("breaks.$loop->index.break_end", formatTimeNullable($break->break_end)) }}">
                                         @else
                                             {{ $break->break_end ? \Carbon\Carbon::parse($break->break_end)->format('H:i') : '' }}
                                         @endif
                                     </td>
-                                    <td></td>
+                                    <td>
+                                        <div class="error-message">
+                                            @php $i = $loop->index; @endphp
+                                            @if ($errors->has("breaks.$i.break_start"))
+                                                {!! $errors->first("breaks.$i.break_start") !!}
+                                            @elseif ($errors->has("breaks.$i.break_end"))
+                                                {!! $errors->first("breaks.$i.break_end") !!}
+                                            @endif
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                             <tr>
@@ -114,10 +140,16 @@
                                     @if ($attend->stamp_correction_request === 'pending')
                                         <p class="remarks">{{ $attend->remarks }}</p>
                                     @else
-                                        <textarea name="remarks" id="" cols="30" rows="10"></textarea>
+                                        <textarea name="remarks" cols="30" rows="10">{{ old('remarks', $attend->remarks) }}</textarea>
                                     @endif
                                 </td>
-                                <td></td>
+                                <td>
+                                    <div class="error-message">
+                                        @error('remarks')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                     </div>
