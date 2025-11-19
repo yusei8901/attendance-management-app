@@ -16,11 +16,19 @@ class Attendance extends Model
         'end_time',
         'work_time',
         'remarks',
-        'stamp_correction_request',
+        'status',
     ];
 
     public function breaks()
     {
         return $this->hasMany(BreakTime::class);
+    }
+    public function editRequests()
+    {
+        return $this->hasMany(AttendanceEditRequest::class);
+    }
+    public function breakEditRequests()
+    {
+        return $this->hasMany(BreakEditRequest::class);
     }
 }

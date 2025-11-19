@@ -41,4 +41,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function editRestrictions()
+    {
+        return $this->hasMany(AttendanceEditRequest::class);
+    }
+    public function breakEditRequests()
+    {
+        return $this->hasMany(BreakEditRequest::class);
+    }
 }

@@ -67,7 +67,7 @@
                             <td>
                                 @if (!$attend)
                                     -
-                                @elseif($attend->stamp_correction_request === 'pending')
+                                @elseif($attend->status === 'pending')
                                     <span class="info-text">修正申請中</span>
                                 @else
                                     {{ formatTimeString($attend->start_time) }}
@@ -76,7 +76,7 @@
                             <td>
                                 @if (!$attend)
                                     -
-                                @elseif($attend->stamp_correction_request === 'pending')
+                                @elseif($attend->status === 'pending')
                                     <span class="info-text">修正申請中</span>
                                 @else
                                     {{ formatTimeString($attend->end_time) }}
@@ -85,7 +85,7 @@
                             <td>
                                 @if (!$attend)
                                     -
-                                @elseif($attend->stamp_correction_request === 'pending')
+                                @elseif($attend->status === 'pending')
                                     <span class="info-text">修正申請中</span>
                                 @else
                                     {{ formatTime($breakMinutes) }}
@@ -94,7 +94,7 @@
                             <td>
                                 @if (!$attend)
                                     -
-                                @elseif($attend->stamp_correction_request === 'pending')
+                                @elseif($attend->status === 'pending')
                                     <span class="info-text">修正申請中</span>
                                 @else
                                     {{ formatTime($attend->work_time) }}

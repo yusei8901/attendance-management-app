@@ -84,7 +84,7 @@ class AttendanceSeeder extends Seeder
                     'end_time' => $end->format('H:i:s'),
                     'work_time' => $workMinutes,
                     'remarks' => null,
-                    'stamp_correction_request' => 'before_request'
+                    'status' => 'before_request'
                 ]);
 
                 // 休憩をbreaksテーブルへ登録

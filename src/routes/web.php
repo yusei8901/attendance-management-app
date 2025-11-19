@@ -54,8 +54,9 @@ Route::middleware(['auth:web', 'verified'])->group(function(){
     // 勤怠詳細画面
     Route::get('/attendance/detail/{id}', [UserAttendanceController::class, 'detail'])
         ->name('user.attendance.detail');
-    Route::post('/attendance/edit/{id}', [UserAttendanceController::class, 'edit'])
-        ->name('user.attendance.edit');
+    // 勤怠詳細画面の修正申請処理
+    Route::post('/attendance/detail/{id}', [UserAttendanceController::class, 'request'])
+        ->name('user.attendance.request');
     // 申請一覧画面
     Route::get('/stamp_correction_request/list', function () {
         return view('user.attendance.requests');
