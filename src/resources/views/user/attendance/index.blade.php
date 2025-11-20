@@ -59,7 +59,9 @@
                     @endphp
                     @foreach ($days as $day)
                         @php
-                            $attend = $attends->firstWhere('work_date', $day->format('Y-m-d'));
+                            $attend = $attends->first(function ($a) use ($day) {
+                                return $a->work_date->isSameDay($day);
+                            });
                             $breakMinutes = $attend ? $attend->breaks->sum('break_time') : 0;
                         @endphp
                         <tr>

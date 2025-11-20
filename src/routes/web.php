@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserAttendanceController;
+use App\Http\Controllers\UserRequestsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\EmailVerificationController;
@@ -58,9 +59,8 @@ Route::middleware(['auth:web', 'verified'])->group(function(){
     Route::post('/attendance/detail/{id}', [UserAttendanceController::class, 'request'])
         ->name('user.attendance.request');
     // 申請一覧画面
-    Route::get('/stamp_correction_request/list', function () {
-        return view('user.attendance.requests');
-    });
+    Route::get('/stamp_correction_request/list', [UserRequestsController::class, 'index'])
+        ->name('user.requests.list');
 });
 
 // 管理者関連

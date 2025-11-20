@@ -105,7 +105,6 @@ class UserAttendanceController extends Controller
         return redirect()->route('user.attendance.detail', ['id' => $attend->id])->with('success_message', '勤怠修正申請を送信しました。');
     }
 
-
     // 勤怠詳細画面の編集処理
     public function edit(CorrectionRequest $request, $id)
     {

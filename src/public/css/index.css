@@ -10,14 +10,7 @@ a {
     width: 900px;
     margin: 0 auto;
 }
-.page-title {
-    font-size: 30px;
-    font-weight: bold;
-    border-left: 8px solid #000;
-    box-sizing: border-box;
-    padding-left: 10px;
-    margin: 0px 0px 30px -10px;
-}
+
 .attendance-month {
     display: flex;
     justify-content: space-between;

@@ -19,6 +19,9 @@ class Attendance extends Model
         'status',
     ];
 
+    protected $casts = [
+        'work_date' => 'date',
+    ];
     public function breaks()
     {
         return $this->hasMany(BreakTime::class);

@@ -1,0 +1,84 @@
+.background-gray {
+    min-height: calc(100vh - 82px);
+    padding: 80px 0px;
+}
+.requests-wrapper {
+    width: 900px;
+    margin: 0 auto;
+}
+
+/* タブメニュー */
+.requests-tab {
+    width: 100%;
+    border-bottom: 2px solid #000;
+    margin: 40px 0px;
+}
+.requests-tab__inner {
+    width: 100%;
+    padding: 3px;
+    list-style: none;
+    display: flex;
+}
+.requests-tab__inner li {
+    font-size: 16px;
+    margin: 0px 50px;
+}
+.requests-tab__inner li.selected {
+    font-weight: bold;
+}
+/* 選択されていないタブは、カーソルをポインター表示にする。*/
+.requests-tab__inner li:not(.selected) {
+    cursor: pointer;
+}
+/* 選択されていないタブは、ホバー時に半透明にする。*/
+.requests-tab__inner li:not(.selected):hover {
+    opacity: 0.6;
+}
+
+/* リスト設定 */
+.requests-list {
+    display: none;
+}
+.requests-list.selected {
+    display: block;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.requests-list table {
+    font-weight: bold;
+    color: #737373;
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
+    border-collapse: collapse;
+    border: none;
+}
+.requests-list th,
+.requests-list td {
+    letter-spacing: 1px;
+    text-indent: 1px;
+    border: none;
+    padding: 15px 0px;
+}
+.requests-list th {
+    border-bottom: #e1e1e1 2px solid;
+}
+.requests-list td {
+    border-bottom: #e1e1e1 1px solid;
+}
+.requests-list table th:nth-child(1),
+.requests-list table td:nth-child(1) {
+    width: 20%;
+}
+.requests-list table th:nth-child(n+2),
+.requests-list table td:nth-child(n+2) {
+    width: calc((100% - 20%) / 5);
+}
+.detail-link {
+    color: #000;
+}
+.detail-link:hover {
+    text-decoration: underline;
+    opacity: 0.7;
+}

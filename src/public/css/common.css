@@ -87,6 +87,15 @@ a {
         opacity: 0;
     }
 }
+/* ページタイトル */
+.page-title {
+    font-size: 30px;
+    font-weight: bold;
+    border-left: 8px solid #000;
+    box-sizing: border-box;
+    padding-left: 10px;
+    margin: 0px 0px 30px -10px;
+}
 
 /* エラーメッセージ */
 .error-message {
