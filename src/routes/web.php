@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdminAttendanceController;
 use App\Http\Controllers\UserAttendanceController;
 use App\Http\Controllers\UserRequestsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -70,14 +71,11 @@ Route::prefix('admin')->group(function() {
 });
 Route::middleware('auth:admin')->group(function(){
     // 勤怠一覧画面
-    Route::get('/admin/attendance/list', function () {
-        $admin = Auth::user();
-        return view('admin.attendance.index', ['admin' => $admin]);
-    });
+    Route::get('/admin/attendance/list/{year?}/{month?}/{day?}', [AdminAttendanceController::class, 'index'])
+        ->name('admin.attendance.list');
     // 勤怠詳細画面
-    Route::get('/admin/attendance/{id}', function () {
-        return view('admin.attendance.detail');
-    });
+    Route::get('/admin/attendance/{id}', [AdminAttendanceController::class, 'detail'])
+        ->name('admin.attendance.detail');
     // スタッフ一覧画面
     Route::get('/admin/staff/list', function () {
         return view('admin.staff.index');

@@ -22,6 +22,10 @@ class Attendance extends Model
     protected $casts = [
         'work_date' => 'date',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function breaks()
     {
         return $this->hasMany(BreakTime::class);
