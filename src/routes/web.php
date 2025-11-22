@@ -76,6 +76,8 @@ Route::middleware('auth:admin')->group(function(){
     // 勤怠詳細画面
     Route::get('/admin/attendance/{id}', [AdminAttendanceController::class, 'detail'])
         ->name('admin.attendance.detail');
+    Route::post('/admin/attendance/{id}', [AdminAttendanceController::class, 'edit'])
+        ->name('admin.attendance.edit');
     // スタッフ一覧画面
     Route::get('/admin/staff/list', function () {
         return view('admin.staff.index');
