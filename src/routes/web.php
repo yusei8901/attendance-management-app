@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAttendanceController;
+use App\Http\Controllers\AdminStaffController;
 use App\Http\Controllers\UserAttendanceController;
 use App\Http\Controllers\UserRequestsController;
 use App\Http\Controllers\Auth\LoginController;
@@ -79,13 +80,12 @@ Route::middleware('auth:admin')->group(function(){
     Route::post('/admin/attendance/{id}', [AdminAttendanceController::class, 'edit'])
         ->name('admin.attendance.edit');
     // スタッフ一覧画面
-    Route::get('/admin/staff/list', function () {
-        return view('admin.staff.index');
-    });
+    Route::get('/admin/staff/list', [AdminStaffController::class, 'index'])
+        ->name('admin.staff.list');
     // スタッフ別勤怠一覧画面
     Route::get('/admin/attendance/staff/{id}', function () {
         return view('admin.staff.attendance');
-    });
+    })->name('admin.staff.attendance');
     // 申請一覧画面
     Route::get('/admin/stamp_correction_request/list', function () {
         return view('admin.requests.index');

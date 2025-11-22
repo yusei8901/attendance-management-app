@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-        <main class="background-gray">
+    <main class="background-gray">
         <div class="attendance-wrapper">
             <h2 class="page-title">{{ $current->format('Y年m月d日') }}の勤怠</h2>
             <div class="attendance-month">
