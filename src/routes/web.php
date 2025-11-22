@@ -83,9 +83,9 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('/admin/staff/list', [AdminStaffController::class, 'index'])
         ->name('admin.staff.list');
     // スタッフ別勤怠一覧画面
-    Route::get('/admin/attendance/staff/{id}', function () {
-        return view('admin.staff.attendance');
-    })->name('admin.staff.attendance');
+    Route::get('/admin/attendance/staff/{id}/{year?}/{month?}', [AdminStaffController::class, 'attend'])
+        ->name('admin.staff.attendance');
+
     // 申請一覧画面
     Route::get('/admin/stamp_correction_request/list', function () {
         return view('admin.requests.index');

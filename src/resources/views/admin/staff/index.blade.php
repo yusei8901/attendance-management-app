@@ -32,7 +32,7 @@
                                 {{ $user->email }}
                             </td>
                             <td>
-                                <a class="detail-link" href="#">詳細</a>
+                                <a class="detail-link" href="{{ route('admin.staff.attendance', $user->id) }}">詳細</a>
                             </td>
                             <td></td>
                         </tr>
