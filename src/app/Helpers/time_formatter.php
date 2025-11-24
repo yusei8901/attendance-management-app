@@ -30,7 +30,7 @@ if (! function_exists('formatTimeNullable')) {
             return '';
         }
         try {
-            return Carbon::parse($value)->format('H:i');
+            return $value->format('H:i');
         } catch (\Exception $e) {
             return '';
         }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminAttendanceController;
 use App\Http\Controllers\AdminStaffController;
+use App\Http\Controllers\AttendanceCSVController;
 use App\Http\Controllers\UserAttendanceController;
 use App\Http\Controllers\UserRequestsController;
 use App\Http\Controllers\Auth\LoginController;
@@ -85,6 +86,9 @@ Route::middleware('auth:admin')->group(function(){
     // スタッフ別勤怠一覧画面
     Route::get('/admin/attendance/staff/{id}/{year?}/{month?}', [AdminStaffController::class, 'attend'])
         ->name('admin.staff.attendance');
+    // csv出力
+    Route::get('/admin/attendance/staff/{id}/{year}/{month}/csv', [AttendanceCSVController::class, 'export'])
+        ->name('admin.attendance.csv');
 
     // 申請一覧画面
     Route::get('/admin/stamp_correction_request/list', function () {

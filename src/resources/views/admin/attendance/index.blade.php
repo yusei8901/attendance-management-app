@@ -65,7 +65,7 @@
                                 @elseif($user->attendanceOfDate->status === 'pending')
                                     <span class="info-text">修正申請中</span>
                                 @else
-                                    {{ formatTimeString($user->attendanceOfDate->start_time) }}
+                                    {{ formatTimeNullable($user->attendanceOfDate->start_time) }}
                                 @endif
                             </td>
                             <td>
@@ -74,7 +74,7 @@
                                 @elseif($user->attendanceOfDate->status === 'pending')
                                     <span class="info-text">修正申請中</span>
                                 @else
-                                    {{ formatTimeString($user->attendanceOfDate->end_time) }}
+                                    {{ formatTimeNullable($user->attendanceOfDate->end_time) }}
                                 @endif
                             </td>
                             <td>
