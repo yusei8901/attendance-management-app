@@ -12,8 +12,12 @@ class UserRequestsController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $pendingAttends = AttendanceEditRequest::with('attendance', 'user')->where('status', 'pending')->get();
-        $approvedAttends = AttendanceEditRequest::with('attendance', 'user')->where('status', 'approved')->get();
+        $pendingAttends = AttendanceEditRequest::with('attendance', 'user')
+        ->where('user_id', $user->id)
+        ->where('status', 'pending')->get();
+        $approvedAttends = AttendanceEditRequest::with('attendance', 'user')
+            ->where('user_id', $user->id)
+        ->where('status', 'approved')->get();
         return view('user.attendance.requests', compact('user', 'pendingAttends', 'approvedAttends'));
     }
 }

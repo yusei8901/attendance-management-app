@@ -21,6 +21,14 @@ class BreakEditRequest extends Model
         'remarks',
         'status',
     ];
+
+    protected $casts = [
+        'old_break_start' => 'datetime:H:i',
+        'old_break_end' => 'datetime:H:i',
+        'new_break_start' => 'datetime:H:i',
+        'new_break_end' => 'datetime:H:i',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

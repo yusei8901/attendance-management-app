@@ -72,7 +72,7 @@
                                 @elseif($attend->status === 'pending')
                                     <span class="info-text">修正申請中</span>
                                 @else
-                                    {{ formatTimeString($attend->start_time) }}
+                                    {{ formatTimeNullable($attend->start_time) }}
                                 @endif
                             </td>
                             <td>
@@ -81,7 +81,7 @@
                                 @elseif($attend->status === 'pending')
                                     <span class="info-text">修正申請中</span>
                                 @else
-                                    {{ formatTimeString($attend->end_time) }}
+                                    {{ formatTimeNullable($attend->end_time) }}
                                 @endif
                             </td>
                             <td>

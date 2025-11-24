@@ -20,6 +20,12 @@ class AttendanceEditRequest extends Model
         'remarks',
         'status',
     ];
+    protected $casts = [
+        'old_start_time' => 'datetime:H:i',
+        'old_end_time' => 'datetime:H:i',
+        'new_start_time' => 'datetime:H:i',
+        'new_end_time' => 'datetime:H:i',
+    ];
 
     public function user()
     {
