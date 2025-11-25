@@ -37,7 +37,7 @@
                             <td>{{ $pendingAttend->attendance->work_date->format('Y/m/d') }}</td>
                             <td>{{ $pendingAttend->remarks }}</td>
                             <td>{{ $pendingAttend->created_at->format('Y/m/d') }}</td>
-                            <td><a href="{{ route('admin.attendance.detail', $pendingAttend->attendance_id) }}" class="detail-link">詳細</a></td>
+                            <td><a href="{{ route('admin.request.detail', $pendingAttend->attendance_id) }}" class="detail-link">詳細</a></td>
                         </tr>
                     @empty
                         <tr><td colspan="6"><span class="error-message">承認待ちの申請はありません</span></td></tr>
@@ -62,7 +62,7 @@
                             <td>{{ $approvedAttend->attendance->work_date->format('Y/m/d') }}</td>
                             <td>{{ $approvedAttend->remarks }}</td>
                             <td>{{ $approvedAttend->created_at->format('Y/m/d') }}</td>
-                            <td><a href="{{ route('admin.attendance.detail', $approvedAttend->attendance_id) }}" class="detail-link">詳細</a></td>
+                            <td><a href="{{ route('admin.request.detail', $approvedAttend->attendance_id) }}" class="detail-link">詳細</a></td>
                         </tr>
                     @empty
                         <tr><td colspan="6"><span class="error-message">承認済みの申請はありません</span></td></tr>

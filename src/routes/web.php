@@ -93,11 +93,11 @@ Route::middleware('auth:admin')->group(function(){
     // 申請一覧画面
     Route::get('/admin/stamp_correction_request/list', [AdminRequestsController::class, 'index'])
         ->name('admin.request.list');
-        
     // 修正申請承認画面
-    Route::get('/admin/stamp_correction_request/approve/{attendance_correct_request_id}', function () {
-        return view('admin.requests.approval');
-    });
+    Route::get('/admin/stamp_correction_request/approve/{attendance_correct_request_id}', [AdminRequestsController::class, 'detail'])
+        ->name('admin.request.detail');
+    Route::post('/admin/stamp_correction_request/approve/{attendance_correct_request_id}', [AdminRequestsController::class, 'update'])
+        ->name('admin.request.approve');
 });
 Route::post('/logout', function () {
     if (auth('admin')->check()) {

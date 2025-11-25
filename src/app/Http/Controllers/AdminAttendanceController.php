@@ -62,8 +62,8 @@ class AdminAttendanceController extends Controller
             'end_time'   => $request->input('end_time'),
             'remarks'    => $request->input('remarks'),
             'work_time'  => max($workMinutes - $breakTotal, 0),
-            'stamp_correction_request' => 'before_request',
+            'status' => 'before_request',
         ]);
-        return redirect()->route('admin.attendance.detail', ['id' => $attend->id])->with('success_message', '勤怠情報を編集しました。');
+        return redirect()->route('admin.attendance.detail', ['id' => $attend->id])->with('success_message', '勤怠情報を編集しました');
     }
 }
