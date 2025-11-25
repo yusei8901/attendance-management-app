@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminAttendanceController;
-use App\Http\Controllers\AdminStaffController;
-use App\Http\Controllers\AdminRequestsController;
-use App\Http\Controllers\AttendanceCSVController;
-use App\Http\Controllers\UserAttendanceController;
-use App\Http\Controllers\UserRequestsController;
+use App\Http\Controllers\Admin\AdminAttendanceController;
+use App\Http\Controllers\Admin\AdminStaffController;
+use App\Http\Controllers\Admin\AdminRequestsController;
+use App\Http\Controllers\Admin\AttendanceCSVController;
+use App\Http\Controllers\User\UserAttendanceController;
+use App\Http\Controllers\User\UserRequestsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\EmailVerificationController;
@@ -28,8 +28,8 @@ Route::prefix('attendance')->name('user.attendance.')->middleware(['auth:web', '
     Route::post('/break/start', [UserAttendanceController::class, 'breakStart'])->name('break.start');
     Route::post('/break/end', [UserAttendanceController::class, 'breakEnd'])->name('break.end');
     Route::get('/list/{year?}/{month?}', [UserAttendanceController::class, 'index'])->name('index');
-    Route::get('/detail/{id}', [UserAttendanceController::class, 'detail'])->name('detail');
-    Route::post('/detail/{id}', [UserAttendanceController::class, 'request'])->name('request');
+    Route::get('/detail/{id}', [UserRequestsController::class, 'detail'])->name('detail');
+    Route::post('/detail/{id}', [UserRequestsController::class, 'request'])->name('request');
 });
 Route::prefix('stamp_correction_request')->name('user.')->middleware(['auth:web', 'verified'])->group(function () {
     Route::get('/list', [UserRequestsController::class, 'index'])->name('requests.list');

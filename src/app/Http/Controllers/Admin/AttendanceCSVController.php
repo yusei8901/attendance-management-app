@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Models\Attendance;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Http\Controllers\Controller;
 
 class AttendanceCSVController extends Controller
 {

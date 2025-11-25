@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Attendance;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Http\Requests\EditRequest;
+use App\Models\Attendance;
+use App\Models\User;
+use App\Http\Controllers\Controller;
 
 class AdminAttendanceController extends Controller
 {

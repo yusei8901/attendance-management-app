@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\EditRequest;
-use Illuminate\Http\Request;
 use App\Models\Attendance;
 use App\Models\AttendanceEditRequest;
 use App\Models\BreakEditRequest;
+use App\Http\Controllers\Controller;
 
 class AdminRequestsController extends Controller
 {

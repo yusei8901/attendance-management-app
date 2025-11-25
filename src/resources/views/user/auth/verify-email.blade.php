@@ -6,7 +6,7 @@
 @endsection
 
 @section('css')
-<link href="{{ asset('css/verify.css') }}" rel="stylesheet" />
+<link href="{{ asset('css/auth/verify.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
