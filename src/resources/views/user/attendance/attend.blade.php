@@ -41,13 +41,13 @@
                 @elseif ($attendance->end_time)
                     <p class="finished-text">お疲れさまでした。</p>
                 @elseif ($latestBreak && $latestBreak->break_end === null)
-                    <form method="POST" action="{{ route('user.break.end') }}">
+                    <form method="POST" action="{{ route('user.attendance.break.end') }}">
                         @csrf
                         <button type="submit" class="btn break">休憩戻</button>
                     </form>
                 @else
                     <div class="two-btn">
-                        <form method="POST" action="{{ route('user.break.start') }}">
+                        <form method="POST" action="{{ route('user.attendance.break.start') }}">
                             @csrf
                             <button type="submit" class="btn break">休憩入</button>
                         </form>

@@ -11,93 +11,43 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use Illuminate\Support\Facades\Route;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
-
-// 一般ユーザー関連
-// 会員登録
 Route::post('/register', [RegisteredUserController::class, 'store'])->middleware(['guest'])->name('user.register');
-// メール認証関連
-Route::middleware('auth:web')->group(function() {
-    Route::get('/email/verify', [EmailVerificationController::class, 'notice'])
-        ->name('verification.notice');
-    Route::get('/email/verify/confirm', [EmailVerificationController::class, 'confirm'])
-        ->name('verification.confirm');
-    Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
-        ->middleware('signed')->name('verification.verify');
-    Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])
-        ->middleware('throttle:6,1')->name('verification.resend');
+Route::prefix('email')->name('verification.')->middleware('auth:web')->group(function() {
+    Route::get('/verify', [EmailVerificationController::class, 'notice'])->name('notice');
+    Route::get('/verify/confirm', [EmailVerificationController::class, 'confirm'])->name('confirm');
+    Route::get('/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->middleware('signed')->name('verify');
+    Route::post('/verification-notification', [EmailVerificationController::class, 'resend'])->middleware('throttle:6,1')->name('resend');
 });
-Route::middleware(['auth:web', 'verified'])->group(function(){
-    // 勤怠登録画面
-    Route::get('/attendance', [UserAttendanceController::class, 'attend'])
-        ->name('user.attendance.attend');
-    Route::post('/attendance/start', [UserAttendanceController::class, 'workStart'])
-        ->name('user.attendance.start');
-    Route::post('/attendance/end', [UserAttendanceController::class, 'workEnd'])
-        ->name('user.attendance.end');
-    Route::post('/attendance/break/start', [UserAttendanceController::class, 'breakStart'])
-        ->name('user.break.start');
-    Route::post('/attendance/break/end', [UserAttendanceController::class, 'breakEnd'])
-        ->name('user.break.end');
-    // 勤怠一覧画面
-    Route::get('/attendance/list/{year?}/{month?}', [UserAttendanceController::class, 'index'])
-        ->name('user.attendance.index');
-    // 勤怠詳細画面
-    Route::get('/attendance/detail/{id}', [UserAttendanceController::class, 'detail'])
-        ->name('user.attendance.detail');
-    // 勤怠詳細画面の修正申請処理
-    Route::post('/attendance/detail/{id}', [UserAttendanceController::class, 'request'])
-        ->name('user.attendance.request');
-    // 申請一覧画面
-    Route::get('/stamp_correction_request/list', [UserRequestsController::class, 'index'])
-        ->name('user.requests.list');
+Route::prefix('attendance')->name('user.attendance.')->middleware(['auth:web', 'verified'])->group(function(){
+    Route::get('/', [UserAttendanceController::class, 'attend'])->name('attend');
+    Route::post('/start', [UserAttendanceController::class, 'workStart'])->name('start');
+    Route::post('/end', [UserAttendanceController::class, 'workEnd'])->name('end');
+    Route::post('/break/start', [UserAttendanceController::class, 'breakStart'])->name('break.start');
+    Route::post('/break/end', [UserAttendanceController::class, 'breakEnd'])->name('break.end');
+    Route::get('/list/{year?}/{month?}', [UserAttendanceController::class, 'index'])->name('index');
+    Route::get('/detail/{id}', [UserAttendanceController::class, 'detail'])->name('detail');
+    Route::post('/detail/{id}', [UserAttendanceController::class, 'request'])->name('request');
 });
-
-// 管理者関連
+Route::prefix('stamp_correction_request')->name('user.')->middleware(['auth:web', 'verified'])->group(function () {
+    Route::get('/list', [UserRequestsController::class, 'index'])->name('requests.list');
+});
 Route::prefix('admin')->group(function() {
     Route::get('/login', [LoginController::class, 'create'])->name('admin.login');
-    Route::post('login', [LoginController::class, 'store']);
+    Route::post('/login', [LoginController::class, 'store']);
 });
-Route::middleware('auth:admin')->group(function(){
-    // 勤怠一覧画面
-    Route::get('/admin/attendance/list/{year?}/{month?}/{day?}', [AdminAttendanceController::class, 'index'])
-        ->name('admin.attendance.list');
-    // 勤怠詳細画面
-    Route::get('/admin/attendance/{id}', [AdminAttendanceController::class, 'detail'])
-        ->name('admin.attendance.detail');
-    Route::post('/admin/attendance/{id}', [AdminAttendanceController::class, 'edit'])
-        ->name('admin.attendance.edit');
-    // スタッフ一覧画面
-    Route::get('/admin/staff/list', [AdminStaffController::class, 'index'])
-        ->name('admin.staff.list');
-    // スタッフ別勤怠一覧画面
-    Route::get('/admin/attendance/staff/{id}/{year?}/{month?}', [AdminStaffController::class, 'attend'])
-        ->name('admin.staff.attendance');
-    // csv出力
-    Route::get('/admin/attendance/staff/{id}/{year}/{month}/csv', [AttendanceCSVController::class, 'export'])
-        ->name('admin.attendance.csv');
-    // 申請一覧画面
-    Route::get('/admin/stamp_correction_request/list', [AdminRequestsController::class, 'index'])
-        ->name('admin.request.list');
-    // 修正申請承認画面
-    Route::get('/admin/stamp_correction_request/approve/{attendance_correct_request_id}', [AdminRequestsController::class, 'detail'])
-        ->name('admin.request.detail');
-    Route::post('/admin/stamp_correction_request/approve/{attendance_correct_request_id}', [AdminRequestsController::class, 'update'])
-        ->name('admin.request.approve');
+Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function(){
+    Route::get('/attendance/list/{year?}/{month?}/{day?}', [AdminAttendanceController::class, 'index'])->name('attendance.list');
+    Route::get('/attendance/{id}', [AdminAttendanceController::class, 'detail'])->name('attendance.detail');
+    Route::post('/attendance/{id}', [AdminAttendanceController::class, 'edit'])->name('attendance.edit');
+    Route::get('/staff/list', [AdminStaffController::class, 'index'])->name('staff.list');
+    Route::get('/attendance/staff/{id}/{year?}/{month?}', [AdminStaffController::class, 'attend'])->name('staff.attendance');
+    Route::get('/attendance/staff/{id}/{year}/{month}/csv', [AttendanceCSVController::class, 'export'])->name('attendance.csv');
+    Route::get('/stamp_correction_request/list', [AdminRequestsController::class, 'index'])->name('request.list');
+    Route::get('/stamp_correction_request/approve/{attendance_correct_request_id}', [AdminRequestsController::class, 'detail'])->name('request.detail');
+    Route::post('/stamp_correction_request/approve/{attendance_correct_request_id}', [AdminRequestsController::class, 'update'])->name('request.approve');
 });
 Route::post('/logout', function () {
     if (auth('admin')->check()) {

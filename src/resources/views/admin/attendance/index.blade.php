@@ -56,54 +56,39 @@
                             $breakMinutes = $user->attendanceOfDate ? $user->attendanceOfDate->breaks->sum('break_time') : 0;
                         @endphp
                         <tr>
-                            <td>
-                                {{ $user->name }}
-                            </td>
-                            <td>
-                                @if (!$user->attendanceOfDate)
-                                    -
-                                @elseif($user->attendanceOfDate->status === 'pending')
-                                    <span class="info-text">修正申請中</span>
+                            @if(!$user->attendanceOfDate)
+                                <td>{{ $user->name }}</td>
+                                <td colspan="5">
+                                    <span class="info-text">本日の稼働はありません</span>
+                                </td>
+                            @else
+                                <td>
+                                    {{ $user->name }}
+                                </td>
+                                @if($user->attendanceOfDate->status === 'pending')
+                                    <td colspan="5">
+                                        <span class="info-text">修正申請中</span>
+                                    </td>
                                 @else
-                                    {{ formatTimeNullable($user->attendanceOfDate->start_time) }}
+                                    <td>
+                                        {{ formatTimeNullable($user->attendanceOfDate->start_time) }}
+                                    </td>
+                                    <td>
+                                        {{ formatTimeNullable($user->attendanceOfDate->end_time) }}
+                                    </td>
+                                    <td>
+                                        {{ formatTime($breakMinutes) }}
+                                    </td>
+                                    <td>
+                                        {{ formatTime($user->attendanceOfDate->work_time) }}
+                                    </td>
+                                    <td>
+                                        <a class="detail-link" href="{{ route('admin.attendance.detail', $user->attendanceOfDate->id) }}">
+                                            詳細
+                                        </a>
+                                    </td>
                                 @endif
-                            </td>
-                            <td>
-                                @if (!$user->attendanceOfDate)
-                                    -
-                                @elseif($user->attendanceOfDate->status === 'pending')
-                                    <span class="info-text">修正申請中</span>
-                                @else
-                                    {{ formatTimeNullable($user->attendanceOfDate->end_time) }}
-                                @endif
-                            </td>
-                            <td>
-                                @if (!$user->attendanceOfDate)
-                                    -
-                                @elseif($user->attendanceOfDate->status === 'pending')
-                                    <span class="info-text">修正申請中</span>
-                                @else
-                                    {{ formatTime($breakMinutes) }}
-                                @endif
-                            </td>
-                            <td>
-                                @if (!$user->attendanceOfDate)
-                                    -
-                                @elseif($user->attendanceOfDate->status === 'pending')
-                                    <span class="info-text">修正申請中</span>
-                                @else
-                                    {{ formatTime($user->attendanceOfDate->work_time) }}
-                                @endif
-                            </td>
-                            <td>
-                                @if ($user->attendanceOfDate)
-                                    <a class="detail-link" href="{{ route('admin.attendance.detail', $user->attendanceOfDate->id) }}">
-                                        詳細
-                                    </a>
-                                @else
-                                    ー
-                                @endif
-                            </td>
+                            @endif
                         </tr>
                     @endforeach
                 </table>
