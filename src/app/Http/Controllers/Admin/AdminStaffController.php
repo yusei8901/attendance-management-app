@@ -9,12 +9,13 @@ use App\Http\Controllers\Controller;
 
 class AdminStaffController extends Controller
 {
+    // スタッフ一覧画面表示
     public function index()
     {
         $users = User::all();
         return view('admin.staff.index', compact('users'));
     }
-
+    // スタッフ別勤怠一覧画面
     public function attend($id, $year = null, $month = null)
     {
         $current = Carbon::createFromDate(

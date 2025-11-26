@@ -73,7 +73,7 @@ class UserAttendanceController extends Controller
         ]);
         return redirect()->route('user.attendance.attend');
     }
-    // 休憩開始
+    // 休憩開始処理
     public function breakStart()
     {
         $attendance = Attendance::where('user_id', auth()->id())
@@ -84,7 +84,7 @@ class UserAttendanceController extends Controller
         ]);
         return redirect()->route('user.attendance.attend');
     }
-    // 休憩終了
+    // 休憩終了処理
     public function breakEnd()
     {
         $attendance = Attendance::where('user_id', auth()->id())

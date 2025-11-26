@@ -14,14 +14,13 @@ class EmailVerificationController extends Controller
     {
         return view('user.auth.verify-email');
     }
-
     // 認証メール再送
     public function resend(Request $request)
     {
         $request->user()->sendEmailVerificationNotification();
         return back()->with('resend_message', '認証メールを再送しました。');
     }
-
+    // 認証確認用URLの発行
     public function confirm()
     {
         $user = auth()->user();
@@ -34,8 +33,7 @@ class EmailVerificationController extends Controller
             'verificationUrl' => $verificationUrl,
         ]);
     }
-
-    // 認証リンクをクリックしたとき
+    // 認証リンクをクリックしたときの処理
     public function verify(EmailVerificationRequest $request)
     {
         $request->fulfill(); // 認証完了

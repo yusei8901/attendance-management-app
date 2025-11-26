@@ -1,6 +1,7 @@
 {{-- 一般ユーザー用共通レイアウト --}}
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link href="{{ asset('css/layout/common.css') }}" rel="stylesheet" />
     @yield('css')
 </head>
+
 <body>
     <header class="header">
         <div class="header-inner">
@@ -21,23 +23,28 @@
                 </h1>
             </div>
             @if (!isset($hideSection) || !$hideSection)
-            <div class="header-right">
-                @if(!isset($attendance) || $attendance->end_time === null)
-                <a class="header-link" href="/attendance">勤怠</a>
-                <a class="header-link" href="/attendance/list">勤怠一覧</a>
-                <a class="header-link" href="/stamp_correction_request/list">申請</a>
-                @else
-                <a class="header-link" href="/attendance/list">今月の出勤一覧</a>
-                <a class="header-link" href="/stamp_correction_request/list">申請一覧</a>
-                @endif
-                <form action="/logout" method="POST">
-                    @csrf
-                    <button class="header-logout">ログアウト</button>
-                </form>
-            </div>
+                <div class="header-right">
+                    @if (!isset($attendance) || $attendance->end_time === null)
+                        <a class="header-link" href="/attendance">勤怠</a>
+                        <a class="header-link" href="/attendance/list">勤怠一覧</a>
+                        @if (Route::has('user.requests.list'))
+                        <a class="header-link" href="{{ route('user.requests.list') }}">申請</a>
+                        @endif
+                    @else
+                        <a class="header-link" href="/attendance/list">今月の出勤一覧</a>
+                        @if (Route::has('user.requests.list'))
+                        <a class="header-link" href="{{ route('user.requests.list') }}">申請</a>
+                        @endif
+                    @endif
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button class="header-logout">ログアウト</button>
+                    </form>
+                </div>
             @endif
         </div>
     </header>
     @yield('content')
 </body>
+
 </html>

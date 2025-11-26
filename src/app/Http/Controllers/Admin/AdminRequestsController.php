@@ -9,14 +9,14 @@ use App\Http\Controllers\Controller;
 
 class AdminRequestsController extends Controller
 {
-    // 修正申請一覧画面表示
+    // 申請一覧画面表示
     public function index()
     {
         $pendingAttends = AttendanceEditRequest::with('attendance', 'user')->where('status', 'pending')->get();
         $approvedAttends = AttendanceEditRequest::with('attendance', 'user')->where('status', 'approved')->get();
         return view('admin.requests.index', compact('pendingAttends', 'approvedAttends'));
     }
-    // 修正申請詳細画面表示
+    // 申請詳細画面表示
     public function detail($attendance_correct_request_id)
     {
         $id = $attendance_correct_request_id;
@@ -26,7 +26,7 @@ class AdminRequestsController extends Controller
             ->where('attendance_id', $id)->get();
         return view('admin.requests.detail', compact('attend', 'breaks'));
     }
-    // 修正申請承認機能
+    // 申請承認機能
     public function update($attendance_correct_request_id)
     {
         $id = $attendance_correct_request_id;

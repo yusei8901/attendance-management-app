@@ -34,6 +34,7 @@ Route::prefix('attendance')->name('user.attendance.')->middleware(['auth:web', '
 Route::prefix('stamp_correction_request')->name('user.')->middleware(['auth:web', 'verified'])->group(function () {
     Route::get('/list', [UserRequestsController::class, 'index'])->name('requests.list');
 });
+
 Route::prefix('admin')->group(function() {
     Route::get('/login', [LoginController::class, 'create'])->name('admin.login');
     Route::post('/login', [LoginController::class, 'store']);
@@ -45,11 +46,22 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('/staff/list', [AdminStaffController::class, 'index'])->name('staff.list');
     Route::get('/attendance/staff/{id}/{year?}/{month?}', [AdminStaffController::class, 'attend'])->name('staff.attendance');
     Route::get('/attendance/staff/{id}/{year}/{month}/csv', [AttendanceCSVController::class, 'export'])->name('attendance.csv');
-    Route::get('/stamp_correction_request/list', [AdminRequestsController::class, 'index'])->name('request.list');
     Route::get('/stamp_correction_request/approve/{attendance_correct_request_id}', [AdminRequestsController::class, 'detail'])->name('request.detail');
     Route::post('/stamp_correction_request/approve/{attendance_correct_request_id}', [AdminRequestsController::class, 'update'])->name('request.approve');
 });
-Route::post('/logout', function () {
+Route::prefix('admin/stamp_correction_request')->name('admin.')->middleware('auth:admin')->group(function () {
+    Route::get('/list', [AdminRequestsController::class, 'index'])->name('request.list');
+});
+
+
+    // Route::prefix('stamp_correction_request')->name('admin.')->middleware('auth:admin')->group(function() {
+    //     Route::get('/list', [AdminRequestsController::class, 'index'])->name('request.list');
+    // });
+    // Route::prefix('stamp_correction_request')->name('user.')->middleware(['auth:web', 'verified'])->group(function () {
+    //     Route::get('/list', [UserRequestsController::class, 'index'])->name('requests.list');
+    // });
+
+    Route::post('/logout', function () {
     if (auth('admin')->check()) {
         auth('admin')->logout();
         return redirect('/admin/login');

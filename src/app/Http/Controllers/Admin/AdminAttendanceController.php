@@ -25,13 +25,13 @@ class AdminAttendanceController extends Controller
         }])->get();
         return view('admin.attendance.index', compact('current', 'users'));
     }
-    // スタッフ勤怠詳細画面
+    // スタッフ勤怠詳細画面表示
     public function detail($id)
     {
         $attend = Attendance::with('user', 'editRequests', 'breakEditRequests')->findOrFail($id);
         return view('admin.attendance.detail', compact('attend'));
     }
-    // 勤怠詳細画面の編集処理
+    // 勤怠データの編集機能
     public function edit(EditRequest $request, $id)
     {
         $attend = Attendance::with('breaks')->findOrFail($id);

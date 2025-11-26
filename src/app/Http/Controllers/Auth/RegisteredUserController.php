@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisteredUserController extends Controller
 {
+    // 会員登録機能
     public function store(RegisterRequest $request)
     {
         $user = User::create([

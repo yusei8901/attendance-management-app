@@ -19,7 +19,6 @@ class Authenticate extends Middleware
             if ($request->is('admin/*')) {
                 return route('admin.login');
             }
-
             // それ以外は一般ユーザー用ログインへ
             return route('login');
         }

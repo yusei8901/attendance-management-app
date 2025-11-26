@@ -1,13 +1,5 @@
 <?php
 
-use Carbon\Carbon;
-
-
-function formatTimeString($time)
-{
-    return substr($time, 0, 5);
-}
-
 function formatTime($minutes)
 {
     // null または空、または数値でなければ '-'
@@ -21,9 +13,7 @@ function formatTime($minutes)
 }
 
 if (! function_exists('formatTimeNullable')) {
-    /**
-     * 時刻（nullable）を HH:MM 形式にフォーマット
-     */
+    // 時刻（nullable）を HH:MM 形式にフォーマット
     function formatTimeNullable($value)
     {
         if (empty($value)) {

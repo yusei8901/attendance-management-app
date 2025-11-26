@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 class AttendanceCSVController extends Controller
 {
+    // csv出力機能
     public function export($id, $year, $month)
     {
         // 対象スタッフ
