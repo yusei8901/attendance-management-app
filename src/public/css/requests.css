@@ -36,10 +36,19 @@
 }
 
 /* リスト設定 */
-.requests-list {
-    display: none;
+.tab-link {
+    display: inline-block;
+    color: #000;
+    margin: 15px 50px;
 }
-.requests-list.selected {
+.tab-link.selected {
+    font-weight: bold;
+}
+.tab-link:hover {
+    opacity: 0.7;
+}
+
+.requests-list {
     display: block;
     width: 100%;
     background-color: #fff;
@@ -82,3 +91,15 @@
     text-decoration: underline;
     opacity: 0.7;
 }
+.pagination svg {
+    width: 20px;
+    height: 20px;
+}
+.pagination .flex.justify-between.flex-1 {
+    display: none;
+}
+
+
+
+
+

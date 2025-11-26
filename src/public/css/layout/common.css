@@ -9,13 +9,13 @@ a {
     text-decoration: none;
 }
 .background-gray {
-    width: 100vw;
+    width: 100%;
     background-color: #f0eff2;
 }
 
 /* ヘッダー設定 */
 .header {
-    width: 100vw;
+    width: 100%;
     position: relative;
     z-index: 10;
     background-color: #000;

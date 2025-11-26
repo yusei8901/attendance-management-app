@@ -50,7 +50,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::post('/stamp_correction_request/approve/{attendance_correct_request_id}', [AdminRequestsController::class, 'update'])->name('request.approve');
 });
 Route::prefix('admin/stamp_correction_request')->name('admin.')->middleware('auth:admin')->group(function () {
-    Route::get('/list', [AdminRequestsController::class, 'index'])->name('request.list');
+    Route::get('/list/{tab?}', [AdminRequestsController::class, 'index'])->name('request.list');
 });
 
 

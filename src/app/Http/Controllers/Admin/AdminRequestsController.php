@@ -6,15 +6,21 @@ use App\Models\Attendance;
 use App\Models\AttendanceEditRequest;
 use App\Models\BreakEditRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class AdminRequestsController extends Controller
 {
     // 申請一覧画面表示
-    public function index()
+    public function index(Request $request)
     {
-        $pendingAttends = AttendanceEditRequest::with('attendance', 'user')->where('status', 'pending')->get();
-        $approvedAttends = AttendanceEditRequest::with('attendance', 'user')->where('status', 'approved')->get();
-        return view('admin.requests.index', compact('pendingAttends', 'approvedAttends'));
+        $tab = $request->query('tab', 'pending');
+        $tab = in_array($tab, ['pending', 'approved']) ? $tab : 'pending';
+        $attends = AttendanceEditRequest::with(['user', 'attendance'])
+            ->where('status', $tab)
+            ->latest()
+            ->paginate(5)
+            ->appends(['tab' => $tab]);
+        return view('admin.requests.index', compact('attends', 'tab'));
     }
     // 申請詳細画面表示
     public function detail($attendance_correct_request_id)
