@@ -153,10 +153,10 @@
                             <tr>
                                 <th>備考</th>
                                 <td colspan="3">
-                                    @if ($attend->status === 'pending')
-                                        <p class="remarks">{{ $attend->editRequests?->first()?->remarks ?? '申請中' }}</p>
-                                    @else
+                                    @if ($attend->status === 'before_request')
                                         <textarea name="remarks" cols="30" rows="10">{{ old('remarks', $attend->remarks) }}</textarea>
+                                    @else
+                                        <p class="remarks">{{ $attend->editRequests?->first()?->remarks ?? '申請中' }}</p>
                                     @endif
                                 </td>
                                 <td>

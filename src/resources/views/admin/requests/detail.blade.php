@@ -76,7 +76,7 @@
                         @if ($attend->status === 'pending')
                             <button class="form-button">承認</button>
                         @else
-                            <p class="info-text">承認済み</p>
+                            <p class="approved">承認済み</p>
                         @endif
                     </div>
                 </form>
