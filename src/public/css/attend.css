@@ -1,13 +1,16 @@
 .background-gray {
-    height: calc(100vh - 82px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .attendance-container {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100%;
 }
+/* 勤怠ラベル部分 */
 .status-label {
     display: inline-block;
     font-size: 18px;
@@ -17,6 +20,7 @@
     border-radius: 20px;
     margin-bottom: 30px;
 }
+/* 出勤時間の表示 */
 .date {
     font-size: 40px;
     margin-bottom:10px;
@@ -32,6 +36,7 @@
 @keyframes blink {
     50% { opacity: 0; }
 }
+/* お疲れさまテキスト */
 .finished-text {
     font-size: 26px;
     font-weight: bold;

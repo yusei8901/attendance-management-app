@@ -16,7 +16,7 @@
         </div>
     @endif
     <main class="background-gray">
-        <div class="detail-wrapper">
+        <div class="content-wrapper">
             <h2 class="page-title">勤怠詳細</h2>
             <div class="detail-content">
                 <form class="detail-form" action="{{ route('user.attendance.request', ['id' => $attend->id]) }}"
@@ -31,9 +31,9 @@
                             </tr>
                             <tr>
                                 <th>日付</th>
-                                <td>{{ \Carbon\Carbon::parse($attend->work_date)->format('Y年') }}</td>
+                                <td>{{ $attend->work_date->format('Y年') }}</td>
                                 <td></td>
-                                <td>{{ \Carbon\Carbon::parse($attend->work_date)->format('n月j日') }}</td>
+                                <td>{{ $attend->work_date->format('n月j日') }}</td>
                                 <td></td>
                             </tr>
                             <tr>

@@ -28,14 +28,10 @@
                     @if (!isset($attendance) || $attendance->end_time === null)
                         <a class="header-link" href="/attendance">勤怠</a>
                         <a class="header-link" href="/attendance/list">勤怠一覧</a>
-                        @if (Route::has('user.requests.list'))
                         <a class="header-link" href="{{ route('user.requests.list') }}">申請</a>
-                        @endif
                     @else
                         <a class="header-link" href="/attendance/list">今月の出勤一覧</a>
-                        @if (Route::has('user.requests.list'))
                         <a class="header-link" href="{{ route('user.requests.list') }}">申請</a>
-                        @endif
                     @endif
                     <form action="/logout" method="POST">
                         @csrf

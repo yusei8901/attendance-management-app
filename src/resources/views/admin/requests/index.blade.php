@@ -11,7 +11,7 @@
 
 @section('content')
     <main class="background-gray">
-        <div class="requests-wrapper">
+        <div class="content-wrapper">
             <h2 class="page-title">申請一覧</h2>
             <div class="requests-tab">
                 <a href="?tab=pending" class="tab-link {{ $tab === 'pending' ? 'selected' : '' }}">承認待ち</a>

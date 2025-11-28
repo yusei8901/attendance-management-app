@@ -16,7 +16,7 @@
         </div>
     @endif
     <main class="background-gray">
-        <div class="detail-wrapper">
+        <div class="content-wrapper">
             <h2 class="page-title">勤怠詳細</h2>
             <div class="detail-content">
                 <form class="detail-form" action="{{ route('admin.request.approve', $attend->attendance_id) }}" method="POST">

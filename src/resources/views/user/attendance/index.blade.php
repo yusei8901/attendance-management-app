@@ -12,7 +12,7 @@
 
 @section('content')
     <main class="background-gray">
-        <div class="attendance-wrapper">
+        <div class="content-wrapper">
             <h2 class="page-title">勤怠一覧</h2>
             <div class="attendance-month">
                 <a class="month-before"

@@ -20,9 +20,13 @@ class AdminAttendanceController extends Controller
             $day ?? Carbon::now()->day
         );
         $admin = Auth::user();
-        $users = User::with(['attendanceOfDate' => function ($q) use ($current) {
+        $users = User::whereHas('attendanceOfDate', function ($q) use ($current) {
+            $q->whereDate('work_date', $current);
+        })
+        ->with(['attendanceOfDate' => function ($q) use ($current) {
             $q->whereDate('work_date', $current)->with('breaks');
-        }])->get();
+        }])
+        ->get();
         return view('admin.attendance.index', compact('current', 'users'));
     }
     // スタッフ勤怠詳細画面表示

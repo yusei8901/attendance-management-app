@@ -6,12 +6,13 @@
 @endsection
 
 @section('css')
-<link href="{{ asset('css/staff-index.css') }}" rel="stylesheet" />
+<link href="{{ asset('css/index.css') }}" rel="stylesheet" />
+<link href="{{ asset('css/staff.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
     <main class="background-gray">
-                <div class="attendance-wrapper">
+                <div class="content-wrapper">
             <h2 class="page-title">スタッフ一覧</h2>
             <div class="attendance-list">
                 <table>

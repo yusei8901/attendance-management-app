@@ -1,5 +1,4 @@
-main {
-    height: 80vh;
+.background-gray {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,6 +13,7 @@ p {
     margin-bottom: 50px;
 }
 
+/* 認証確認画面のボタン */
 .verify-button {
     text-decoration: none;
     color: #000;
@@ -29,7 +29,7 @@ p {
 .verify-button:hover {
     opacity: 0.8;
 }
-
+/* 認証メール再送リンク */
 .verify-email-again {
     font-size: 20px;
     color: #0073cc;

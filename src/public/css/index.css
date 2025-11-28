@@ -1,16 +1,7 @@
 a {
     color: #737373;
 }
-
-.background-gray {
-    min-height: calc(100vh - 82px);
-    padding: 80px 0px;
-}
-.attendance-wrapper {
-    width: 900px;
-    margin: 0 auto;
-}
-
+/* 月選択部分 */
 .attendance-month {
     display: flex;
     justify-content: space-between;
@@ -21,6 +12,7 @@ a {
     border-radius: 10px;
     margin-bottom: 40px;
 }
+/* 前月部分 */
 .month-before {
     margin-left: 25px;
     position: relative;
@@ -37,6 +29,7 @@ a {
     top: 50%;
     transform: translateY(-50%);
 }
+/* 翌月部分 */
 .month-next {
     margin-right: 25px;
     position: relative;
@@ -59,52 +52,7 @@ a {
     cursor: pointer;
     opacity: 0.7;
 }
-
-.attendance-list {
-    width: 100%;
-    background-color: #fff;
-    border-radius: 10px;
-}
-.attendance-list table {
-    font-weight: bold;
-    color: #737373;
-    width: 100%;
-    table-layout: fixed;
-    text-align: center;
-    border-collapse: collapse;
-    border: none;
-}
-.attendance-list th,
-.attendance-list td {
-    letter-spacing: 3px;
-    text-indent: 3px;
-    border: none;
-    padding: 8px 0px;
-}
-.attendance-list th {
-    border-bottom: #e1e1e1 2px solid;
-}
-.attendance-list td {
-    border-bottom: #e1e1e1 1px solid;
-}
-.attendance-list table th:nth-child(1),
-.attendance-list table td:nth-child(1) {
-    width: 25%;
-}
-.attendance-list table th:nth-child(n+2),
-.attendance-list table td:nth-child(n+2) {
-    width: calc((100% - 25%) / 5);
-}
-.detail-link {
-    color: #000;
-}
-.detail-link:hover {
-    text-decoration: underline;
-    opacity: 0.7;
-}
-
-
-/* 月選択に関して */
+/* カレンダー部分 */
 .month-display {
     border: none;
     background: transparent;
@@ -155,7 +103,49 @@ a {
     background: #4A8BF5;
     color: #fff;
 }
-
+/* 勤怠部分 */
+.attendance-list {
+    width: 100%;
+}
+.attendance-list table {
+    font-weight: bold;
+    color: #737373;
+    background-color: #fff;
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
+    border-collapse: collapse;
+    border: none;
+    border-radius: 10px;
+}
+.attendance-list th,
+.attendance-list td {
+    letter-spacing: 3px;
+    text-indent: 3px;
+    border: none;
+    padding: 8px 0px;
+}
+.attendance-list th {
+    border-bottom: #e1e1e1 2px solid;
+}
+.attendance-list td {
+    border-bottom: #e1e1e1 1px solid;
+}
+.attendance-list table th:nth-child(1),
+.attendance-list table td:nth-child(1) {
+    width: 25%;
+}
+.attendance-list table th:nth-child(n+2),
+.attendance-list table td:nth-child(n+2) {
+    width: calc((100% - 25%) / 5);
+}
+.detail-link {
+    color: #000;
+}
+.detail-link:hover {
+    text-decoration: underline;
+    opacity: 0.7;
+}
 /* csvボタン */
 .attendance-csv {
     margin-top: 50px;

@@ -59,24 +59,23 @@
                 @endif
             </div>
         </div>
-
-        <script>
-            function updateClock() {
-                const now = new Date();
-                const year = now.getFullYear();
-                const month = now.getMonth() + 1;
-                const date = now.getDate();
-                const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
-                const day = dayNames[now.getDay()];
-                document.getElementById('current-date').textContent =
-                    `${year}年${month}月${date}日(${day})`;
-                const hh = String(now.getHours()).padStart(2, '0');
-                const mm = String(now.getMinutes()).padStart(2, '0');
-                document.getElementById('hh').textContent = hh;
-                document.getElementById('mm').textContent = mm;
-            }
-            updateClock();
-            setInterval(updateClock, 1000);
-        </script>
     </main>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const date = now.getDate();
+            const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+            const day = dayNames[now.getDay()];
+            document.getElementById('current-date').textContent =
+                `${year}年${month}月${date}日(${day})`;
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('hh').textContent = hh;
+            document.getElementById('mm').textContent = mm;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
 @endsection

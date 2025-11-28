@@ -16,7 +16,7 @@
         </div>
     @endif
     <main class="background-gray">
-        <div class="detail-wrapper">
+        <div class="content-wrapper">
             <h2 class="page-title">勤怠詳細</h2>
             <div class="detail-content">
                 <form class="detail-form" action="{{ route('admin.attendance.edit', ['id' => $attend->id]) }}" method="POST">
@@ -30,9 +30,9 @@
                             </tr>
                             <tr>
                                 <th>日付</th>
-                                <td>{{ \Carbon\Carbon::parse($attend->work_date)->format('Y年') }}</td>
+                                <td>{{ $attend->work_date->format('Y年') }}</td>
                                 <td></td>
-                                <td>{{ \Carbon\Carbon::parse($attend->work_date)->format('n月j日') }}</td>
+                                <td>{{ $attend->work_date->format('n月j日') }}</td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -138,10 +138,10 @@
                             <tr>
                                 <th>備考</th>
                                 <td colspan="3">
-                                    @if ($attend->status === 'pending')
-                                        <p class="remarks">{{ $attend->editRequests?->first()?->remarks ?? '申請中' }}</p>
-                                    @else
+                                    @if ($attend->status === 'before_request')
                                         <textarea name="remarks" cols="30" rows="10">{{ old('remarks', $attend->remarks) }}</textarea>
+                                    @else
+                                        <p class="remarks">{{ $attend->editRequests?->first()?->remarks ?? '' }}</p>
                                     @endif
                                 </td>
                                 <td>

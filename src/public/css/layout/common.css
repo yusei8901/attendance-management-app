@@ -9,8 +9,14 @@ a {
     text-decoration: none;
 }
 .background-gray {
+    padding: 80px 0px;
     width: 100%;
+    min-height: calc(100vh - 82px);
     background-color: #f0eff2;
+}
+.content-wrapper {
+    width: 900px;
+    margin: 0 auto;
 }
 
 /* ヘッダー設定 */
@@ -63,6 +69,7 @@ a {
     color: aquamarine;
 }
 
+
 /* 成功アラート */
 .alert-success {
     width: 100%;
@@ -87,6 +94,8 @@ a {
         opacity: 0;
     }
 }
+
+
 /* ページタイトル */
 .page-title {
     font-size: 30px;
@@ -97,7 +106,8 @@ a {
     margin: 0px 0px 30px -10px;
 }
 
-/* エラーメッセージ */
+
+/* エラーメッセージ用スタイル */
 .error-message {
     color: #ff0000;
     height: 20px;
@@ -118,6 +128,7 @@ a {
     cursor: pointer;
 }
 
+/* 注目文字用スタイル */
 .info-text {
     color: #ff0000;
     font-size: 18px;

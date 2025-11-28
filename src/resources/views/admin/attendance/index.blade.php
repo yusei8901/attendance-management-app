@@ -2,7 +2,7 @@
 @extends('layouts.admin')
 
 @section('title')
-勤怠一覧
+    勤怠一覧
 @endsection
 
 @section('css')
@@ -12,7 +12,7 @@
 
 @section('content')
     <main class="background-gray">
-        <div class="attendance-wrapper">
+        <div class="content-wrapper">
             <h2 class="page-title">{{ $current->format('Y年m月d日') }}の勤怠</h2>
             <div class="attendance-month">
                 <a class="month-before"
@@ -51,46 +51,38 @@
                         <th>合計</th>
                         <th>詳細</th>
                     </tr>
-                    @foreach($users as $user)
+                    @foreach ($users as $user)
                         @php
-                            $breakMinutes = $user->attendanceOfDate ? $user->attendanceOfDate->breaks->sum('break_time') : 0;
+                            $attend = $user->attendanceOfDate;
+                            $breakMinutes = $attend->breaks->sum('break_time');
                         @endphp
                         <tr>
-                            @if(!$user->attendanceOfDate)
-                                <td>{{ $user->name }}</td>
+                            <td>{{ $user->name }}</td>
+                            @if ($attend->status === 'pending')
                                 <td colspan="5">
-                                    <span class="info-text">本日の稼働はありません</span>
+                                    <span class="info-text">修正申請中</span>
                                 </td>
                             @else
+                                <td>{{ formatTimeNullable($attend->start_time) }}</td>
+                                <td>{{ formatTimeNullable($attend->end_time) }}</td>
+                                <td>{{ formatTime($breakMinutes) }}</td>
+                                <td>{{ formatTime($attend->work_time) }}</td>
                                 <td>
-                                    {{ $user->name }}
+                                    <a class="detail-link"
+                                        href="{{ route('admin.attendance.detail', $attend->id) }}">
+                                        詳細
+                                    </a>
                                 </td>
-                                @if($user->attendanceOfDate->status === 'pending')
-                                    <td colspan="5">
-                                        <span class="info-text">修正申請中</span>
-                                    </td>
-                                @else
-                                    <td>
-                                        {{ formatTimeNullable($user->attendanceOfDate->start_time) }}
-                                    </td>
-                                    <td>
-                                        {{ formatTimeNullable($user->attendanceOfDate->end_time) }}
-                                    </td>
-                                    <td>
-                                        {{ formatTime($breakMinutes) }}
-                                    </td>
-                                    <td>
-                                        {{ formatTime($user->attendanceOfDate->work_time) }}
-                                    </td>
-                                    <td>
-                                        <a class="detail-link" href="{{ route('admin.attendance.detail', $user->attendanceOfDate->id) }}">
-                                            詳細
-                                        </a>
-                                    </td>
-                                @endif
                             @endif
                         </tr>
                     @endforeach
+                    @if($users->isEmpty())
+                        <tr>
+                            <td colspan="6">
+                                <span class="info-text">出勤記録がありません</span>
+                            </td>
+                        </tr>
+                    @endif
                 </table>
             </div>
         </div>
@@ -109,5 +101,4 @@
             window.location.href = `/admin/attendance/list/${year}/${month}/${day}`;
         });
     </script>
-
 @endsection

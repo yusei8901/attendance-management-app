@@ -1,5 +1,6 @@
 <?php
 
+// 勤怠時間の合計や休憩時間の合計用の表示
 function formatTime($minutes)
 {
     // null または空、または数値でなければ '-'
@@ -12,6 +13,7 @@ function formatTime($minutes)
     return $hours . ':' . sprintf('%02d', $mins);
 }
 
+// 時間のフォーマット
 if (! function_exists('formatTimeNullable')) {
     // 時刻（nullable）を HH:MM 形式にフォーマット
     function formatTimeNullable($value)

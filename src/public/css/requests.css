@@ -1,38 +1,8 @@
-.background-gray {
-    min-height: calc(100vh - 82px);
-    padding: 80px 0px;
-}
-.requests-wrapper {
-    width: 900px;
-    margin: 0 auto;
-}
-
 /* タブメニュー */
 .requests-tab {
     width: 100%;
     border-bottom: 2px solid #000;
     margin: 40px 0px;
-}
-.requests-tab__inner {
-    width: 100%;
-    padding: 3px;
-    list-style: none;
-    display: flex;
-}
-.requests-tab__inner li {
-    font-size: 16px;
-    margin: 0px 50px;
-}
-.requests-tab__inner li.selected {
-    font-weight: bold;
-}
-/* 選択されていないタブは、カーソルをポインター表示にする。*/
-.requests-tab__inner li:not(.selected) {
-    cursor: pointer;
-}
-/* 選択されていないタブは、ホバー時に半透明にする。*/
-.requests-tab__inner li:not(.selected):hover {
-    opacity: 0.6;
 }
 
 /* リスト設定 */
