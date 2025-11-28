@@ -8,6 +8,7 @@ use App\Http\Requests\CorrectionRequest;
 use App\Models\BreakEditRequest;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class UserRequestsController extends Controller
 {
@@ -86,15 +87,17 @@ class UserRequestsController extends Controller
         return redirect()->route('user.attendance.detail', ['id' => $attend->id])->with('success_message', '勤怠修正申請を送信しました。');
     }
     // 申請一覧画面表示
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
-        $pendingAttends = AttendanceEditRequest::with('attendance', 'user')
+        $tab = $request->query('tab', 'pending');
+        $tab = in_array($tab, ['pending', 'approved'], true) ? $tab : 'pending';
+        $attends = AttendanceEditRequest::with(['user', 'attendance'])
         ->where('user_id', $user->id)
-        ->where('status', 'pending')->get();
-        $approvedAttends = AttendanceEditRequest::with('attendance', 'user')
-            ->where('user_id', $user->id)
-        ->where('status', 'approved')->get();
-        return view('user.attendance.requests', compact('user', 'pendingAttends', 'approvedAttends'));
+        ->where('status', $tab)
+        ->latest()
+        ->paginate(5)
+        ->appends(['tab' => $tab]);
+        return view('user.attendance.requests', compact('attends', 'tab'));
     }
 }

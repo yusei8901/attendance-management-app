@@ -31,9 +31,8 @@ Route::prefix('attendance')->name('user.attendance.')->middleware(['auth:web', '
     Route::get('/detail/{id}', [UserRequestsController::class, 'detail'])->name('detail');
     Route::post('/detail/{id}', [UserRequestsController::class, 'request'])->name('request');
 });
-Route::prefix('stamp_correction_request')->name('user.')->middleware(['auth:web', 'verified'])->group(function () {
-    Route::get('/list', [UserRequestsController::class, 'index'])->name('requests.list');
-});
+
+
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', [LoginController::class, 'create'])->name('admin.login');
@@ -49,19 +48,44 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('/stamp_correction_request/approve/{attendance_correct_request_id}', [AdminRequestsController::class, 'detail'])->name('request.detail');
     Route::post('/stamp_correction_request/approve/{attendance_correct_request_id}', [AdminRequestsController::class, 'update'])->name('request.approve');
 });
+
+// 応急処置用Route
+Route::prefix('stamp_correction_request')->name('user.')->middleware(['auth:web', 'verified'])->group(function () {
+    Route::get('/list', [UserRequestsController::class, 'index'])->name('requests.list');
+});
 Route::prefix('admin/stamp_correction_request')->name('admin.')->middleware('auth:admin')->group(function () {
     Route::get('/list/{tab?}', [AdminRequestsController::class, 'index'])->name('request.list');
 });
 
+// Route::prefix('stamp_correction_request')->name('admin.')->middleware('auth:admin')->group(function() {
+//     Route::get('/list', [AdminRequestsController::class, 'index'])->name('request.list');
+// });
+// Route::prefix('stamp_correction_request')->name('user.')->middleware(['auth:web', 'verified'])->group(function () {
+//     Route::get('/list', [UserRequestsController::class, 'index'])->name('requests.list');
+// });
 
-    // Route::prefix('stamp_correction_request')->name('admin.')->middleware('auth:admin')->group(function() {
-    //     Route::get('/list', [AdminRequestsController::class, 'index'])->name('request.list');
-    // });
-    // Route::prefix('stamp_correction_request')->name('user.')->middleware(['auth:web', 'verified'])->group(function () {
-    //     Route::get('/list', [UserRequestsController::class, 'index'])->name('requests.list');
-    // });
 
-    Route::post('/logout', function () {
+// // 管理者
+// Route::prefix('admin/stamp_correction_request')
+//     ->name('admin.request.')
+//     ->middleware(['auth:admin'])
+//     ->group(function () {
+
+//         Route::get('/list/{tab?}', [AdminRequestsController::class, 'index'])
+//             ->name('list');
+//     });
+// // 通常ユーザー
+// Route::prefix('stamp_correction_request')
+//     ->name('user.request.')
+//     ->middleware(['auth:web', 'verified'])
+//     ->group(function () {
+
+//         Route::get('/list/{tab?}', [UserRequestsController::class, 'index'])
+//             ->name('list');
+//     });
+
+
+Route::post('/logout', function () {
     if (auth('admin')->check()) {
         auth('admin')->logout();
         return redirect('/admin/login');

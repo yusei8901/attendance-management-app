@@ -22,6 +22,7 @@ class AdminRequestsController extends Controller
             ->appends(['tab' => $tab]);
         return view('admin.requests.index', compact('attends', 'tab'));
     }
+    
     // 申請詳細画面表示
     public function detail($attendance_correct_request_id)
     {
