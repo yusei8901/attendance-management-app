@@ -48,8 +48,8 @@
                     @endforelse
                 </table>
             </div>
-            <div class="pagination">
-                {{ $attends->links('vendor.pagination.tailwind2') }}
+            <div class="d-flex justify-content-center mt-4">
+                {{ $attends->links() }}
             </div>
         </div>
     </main>
