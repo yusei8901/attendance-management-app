@@ -48,11 +48,11 @@ class CustomLoginRequest extends FortifyLoginRequest
                 $credentials = $this->only('email', 'password');
                 if ($this->is('admin/*')) {
                     if (! Auth::guard('admin')->validate($credentials)) {
-                        $validator->errors()->add('email', 'ログイン情報が登録されていません。');
+                        $validator->errors()->add('email', 'ログイン情報が登録されていません');
                     }
                 } else {
                     if (! Auth::guard('web')->validate($credentials)) {
-                        $validator->errors()->add('email', 'ログイン情報が登録されていません。');
+                        $validator->errors()->add('email', 'ログイン情報が登録されていません');
                     }
                 }
             }

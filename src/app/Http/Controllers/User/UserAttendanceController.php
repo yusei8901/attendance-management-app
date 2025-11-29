@@ -35,10 +35,7 @@ class UserAttendanceController extends Controller
         $attendance = Attendance::where('user_id', $user->id)
             ->where('work_date', $today)
             ->first();
-        $latestBreak = null;
-        if ($attendance) {
-            $latestBreak = $attendance->breaks()->latest()->first();
-        }
+        $latestBreak = $attendance ? $attendance->breaks()->latest()->first() : null;
         return view('user.attendance.attend', compact('attendance', 'latestBreak'));
     }
     // 出勤処理

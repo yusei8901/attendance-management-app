@@ -44,6 +44,7 @@ class RegisterRequest extends FormRequest
             'email.unique' => '既に使用されているメールアドレスです',
             'password.required' => 'パスワードを入力してください',
             'password.min' => 'パスワードは8文字以上で入力してください',
+            'password.confirmed' => '確認用パスワードと一致しません',
             'password_confirmation.required' => '確認用パスワードを入力してください',
             'password_confirmation.same' => 'パスワードと一致しません'
         ];
