@@ -36,7 +36,7 @@
                 @if (!$attendance)
                     <form method="POST" action="{{ route('user.attendance.start') }}">
                         @csrf
-                        <button type="submit" class="btn attend">出勤</button>
+                        <button type="submit" class="btn attend" data-testid="clock-in-btn">出勤</button>
                     </form>
                 @elseif ($attendance->end_time)
                     <p class="finished-text">お疲れさまでした。</p>
