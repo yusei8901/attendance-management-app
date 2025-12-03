@@ -28,7 +28,7 @@ class CorrectionRequest extends FormRequest
         return [
             'new_start_time' => 'required|date_format:H:i',
             'new_end_time' => 'required|date_format:H:i|after:new_start_time',
-            'new_breaks.*.break_start' => 'nullable|date_format:H:i',
+            'new_breaks.*.break_start' => 'nullable|date_format:H:i|before:new_end_time',
             'new_breaks.*.break_end' => 'nullable|date_format:H:i',
             'remarks' => 'required|string|max:255',
         ];
@@ -43,7 +43,7 @@ class CorrectionRequest extends FormRequest
             'new_end_time.required' => '退勤時刻を入力してください',
             'new_end_time.date_format' => '<div class="up-position">退勤時刻の形式が正しくありません<br>入力例：09:00（半角で入力）</div>',
             'new_end_time.after' => '<div class="up-position">出勤時間もしくは退勤時間が<br>不適切な値です</div>',
-
+            'new_breaks.*.break_start.before' => '休憩時間が不適切な値です',
             'new_breaks.*.break_start.date_format' => '<div class="up-position">休憩開始時刻の形式が正しくありません<br>入力例：09:00（半角で入力）</div>',
 
             'new_breaks.*.break_end.date_format' => '<div class="up-position">休憩終了時刻の形式が正しくありません<br>入力例：09:00（半角で入力）</div>',
