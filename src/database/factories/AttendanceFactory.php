@@ -4,10 +4,12 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Attendance;
+use App\Models\User;
 use Carbon\Carbon;
 
 class AttendanceFactory extends Factory
 {
+    protected $model = Attendance::class;
     /**
      * Define the model's default state.
      *
@@ -15,10 +17,14 @@ class AttendanceFactory extends Factory
      */
     public function definition()
     {
+        $start = Carbon::create(2025, 12, 10, 9, 0);
+        $end = (clone $start)->addHours(9);
         return [
-            'work_date' => Carbon::today(),
-            'start_time' => Carbon::parse('09:00'),
-            'end_time' => Carbon::parse('18:00'),
+            'user_id' => User::factory(),
+            'work_date' => $start->toDateString(),
+            'start_time' => $start,
+            'end_time'   => $end,
+            'work_time'  => $end->diffInMinutes($start),
         ];
     }
 }

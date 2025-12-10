@@ -54,7 +54,7 @@ Route::prefix('stamp_correction_request')->name('user.')->middleware(['auth:web'
     Route::get('/list', [UserRequestsController::class, 'index'])->name('requests.list');
 });
 Route::prefix('admin/stamp_correction_request')->name('admin.')->middleware('auth:admin')->group(function () {
-    Route::get('/list/{tab?}', [AdminRequestsController::class, 'index'])->name('request.list');
+    Route::get('/list', [AdminRequestsController::class, 'index'])->name('request.list');
 });
 
 // Route::prefix('stamp_correction_request')->name('admin.')->middleware('auth:admin')->group(function() {
