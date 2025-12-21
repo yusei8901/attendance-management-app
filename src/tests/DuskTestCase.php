@@ -18,6 +18,7 @@ abstract class DuskTestCase extends BaseTestCase
     public static function prepare(): void
     {
         // static::startChromeDriver();
+        static::startChromeDriver(['--port=9515', '--host=127.0.0.1']);
         // static::startChromeDriver(['--port=9515', '--no-sandbox', '--disable-dev-shm-usage']);
     }
 
@@ -45,7 +46,7 @@ abstract class DuskTestCase extends BaseTestCase
         ]);
 
         return RemoteWebDriver::create(
-            $_ENV['DUSK_DRIVER_URL'] ?? 'http://localhost:9515',
+            $_ENV['DUSK_DRIVER_URL'] ?? 'http://127.0.0.1:9515',
             DesiredCapabilities::chrome()->setCapability(
                 ChromeOptions::CAPABILITY,
                 $options
