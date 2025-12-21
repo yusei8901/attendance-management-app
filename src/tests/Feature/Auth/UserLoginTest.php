@@ -57,6 +57,6 @@ class UserLoginTest extends TestCase
             'password' => 'password123',
         ]);
         $this->assertAuthenticatedAs($user);
-        $response->assertRedirect('/admin/attendance/list');
+        $response->assertRedirect('/attendance');
     }
 }
