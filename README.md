@@ -40,27 +40,32 @@ MAIL_FROM_ADDRESSは任意のメールアドレスを入力してください。
 
 ## テストアカウント
 ### 一般アカウント
-name: 一般ユーザー１
-email: user1@example.com
-password: password
+
+name: 一般ユーザー１<br>
+email: user1@example.com<br>
+password: password<br>
 -------------------------
-name: 一般ユーザー２
-email: user2@example.com
-password: password
+
+name: 一般ユーザー２<br>
+email: user2@example.com<br>
+password: password<br>
 -------------------------
-name: 一般ユーザー３
-email: user3@example.com
-password: password
+
+name: 一般ユーザー３<br>
+email: user3@example.com<br>
+password: password<br>
 -------------------------
-name: 一般ユーザー４
-email: user4@example.com
-password: password
+
+name: 一般ユーザー４<br>
+email: user4@example.com<br>
+password: password<br>
 -------------------------
 
 ### 管理者アカウント
-name: 管理者１
-email: admin@example.com
-password: password
+
+name: 管理者１<br>
+email: admin@example.com<br>
+password: password<br>
 -------------------------
 
 ## 使用技術（実行環境）
@@ -73,8 +78,11 @@ password: password
 
 ・nginx 1.21.1
 
+## テストについて
 
-## PHPUnitを使用したテストについて
+テストはPHPUnitとLaravelDuskを使用しています。
+
+### PHPUnitについて
 以下のコマンド:
 ```
 //テスト用データベースの作成
@@ -84,15 +92,26 @@ mysql -u root -p
 create database test_database;
 
 docker-compose exec php bash
+//.env.testingファイルの作成
+cp .env .env.testing
+
 php artisan migrate:fresh --env=testing
 php artisan test tests/Feature
 ```
 
-## LaravelDuskを使用したブラウザテストについて
+### Laravel Duskについて
 以下のコマンド：
 ```
+//.env.dusk.localファイルの作成
+cp .env.testing .env.dusk.local
 
+```
 
+env.dusk.localファイルのAPP_URL=http://localhost の部分を<br>
+APP_URL=http://nginx に変更してください。
+
+続けて以下のコマンド
+```
 docker-compose exec php bash
-
+php artisan dusk tests/Browser/CurrentDateTimeTest.php
 ```

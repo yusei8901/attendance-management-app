@@ -24,3 +24,6 @@ cache:
 	docker-compose exec php php artisan config:cache 
 stop:
 	docker-compose stop
+
+unitTest:
+	docker-compose exec php ./vendor/bin/phpunit --testsuite=Unit
