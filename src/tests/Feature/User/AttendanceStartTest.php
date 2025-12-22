@@ -24,7 +24,7 @@ class AttendanceStartTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user, 'web');
         $response = $this->get(route('user.attendance.attend'));
-        $response->assertSee('data-testid="clock-in-btn"'); //出勤ボタンの確認
+        $response->assertSee('data-testid="clock-in-btn"', false); //出勤ボタンの確認
 
         $response = $this->post(route('user.attendance.start'))->assertStatus(302);
         $response = $this->get(route('user.attendance.attend'));
